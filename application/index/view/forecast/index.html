@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气预报</title> 
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="container">
+	<div class="row">
+	    <div class="col-sm-7">
+	        <div class="ibox float-e-margins">	          
+	            <div class="ibox-content">
+	                <div class="row">
+	                    <div class="col-sm-6 b-r">
+	                        <h3 class="m-t-none m-b">天气预报</h3>
+	                        <form role="form" action="{:url('forecast/forecast')}" method="post">
+	                            <div class="form-group">
+	                                <input type="text" placeholder="请输入城市" class="form-control" name="city">
+	                                <label>天气</label>
+                                    <a>&nbsp;&nbsp;&nbsp;</a>
+	                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>查 询</strong></button>	 
+	                            </div>
+	                        </form>
+	                    </div>	                   
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div> 
+<script src="/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
