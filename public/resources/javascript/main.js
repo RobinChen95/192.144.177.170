@@ -4,51 +4,34 @@ jQuery(document).ready(function($) {
 
 	"use strict";
 
-	[].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
-		new SelectFx(el);
-	});
-
-	jQuery('.selectpicker').selectpicker;
-
-
-	
-
-	$('.search-trigger').on('click', function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		$('.search-trigger').parent('.header-left').addClass('open');
-	});
-
-	$('.search-close').on('click', function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		$('.search-trigger').parent('.header-left').removeClass('open');
-	});
-
-	$('.equal-height').matchHeight({
-		property: 'max-height'
-	});
-
-	// var chartsheight = $('.flotRealtime2').height();
-	// $('.traffic-chart').css('height', chartsheight-122);
-
-
-	// Counter Number
-	$('.count').each(function () {
-		$(this).prop('Counter',0).animate({
-			Counter: $(this).text()
-		}, {
-			duration: 3000,
-			easing: 'swing',
-			step: function (now) {
-				$(this).text(Math.ceil(now));
-			}
-		});
-	});
-
-
-	 
-	 
+	 // Menu Active
+    var urll = (window.location.href).split("manager/")[1];
+  	urll = urll.split(".html")[0].split('/');
+      $('#test').text(urll); 
+    if(urll[0] == "manage"){
+      	$('#manage').addClass('active'); 
+    }else if(urll[0] == "first_trial"){
+      	$('#first').addClass('active'); 
+	}else if(urll[0] == "final_trial"){
+      	$('#final').addClass('active'); 
+	}else if(urll[0] == "credential_search"){
+      	$('#fixedsearch').addClass('active'); 
+	}else if(urll[0] == "people_appoint_search"){
+      	$('#mansearch').addClass('active'); 
+	}else if(urll[0] == "car_appoint_search"){
+      	$('#carsearch').addClass('active'); 
+	}else if(urll[0] == "god_hand" ){
+        if(urll[1] == "add" || urll[1] == "loss" || urll[1] == "invalid" ){
+      		$('#fixedmanage').addClass('active'); 
+    	}else if(urll[1] == "peopleappoint"){
+      		$('#manmanage').addClass('active'); 
+        }else if(urll[1] == "carappoint"){
+      		$('#carmanage').addClass('active'); 
+        }
+	}else if(urll[0] == "plugin_content"){
+      	$('#esm1').addClass('active'); 
+	}
+  
 	// Menu Trigger
 	$('#menuToggle').on('click', function(event) {
 		var windowWidth = $(window).width();   		 

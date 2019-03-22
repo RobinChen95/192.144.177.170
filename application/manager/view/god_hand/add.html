@@ -1,13 +1,9 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.messj.xyz/manager/god_hand/add.html -->
+<html class="no-js" lang=""><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>ESM后台管理系统</title>
-
     <link rel="stylesheet" href="/resources/css/normalize.css">
 	<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/resources/css/font-awesome.min.css">
@@ -53,75 +49,21 @@
         #cellPaiChart{
             height: 160px;
         }
-
+		
     </style>
 </head>
 
 <body>
     <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="{:url('manage/index')}"><i class="menu-icon fa fa-laptop"></i>首页 </a>
-                    </li>
-                    <li class="menu-title">车证审核</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('first_trial/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>初步审核</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('final_trial/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>最终审核</a>
-                    </li>
-                    <li class="menu-title">信息查询</li><!-- /.menu-title -->
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('credential_search/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>固定车证信息查询</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('people_appoint_search/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>人员入校预约查询</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('car_appoint_search/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-line-chart"></i>车辆入校预约查询</a>
-                    </li>
-                    <li class="menu-title">信息管理</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children active dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>固定车证管理</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{:url('god_hand/add')}">快速添加</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{:url('god_hand/loss')}">车证挂失</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{:url('god_hand/invalid')}">车证失效</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('god_hand/peopleappoint')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>人员入校快速预约</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('god_hand/carappoint')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-line-chart"></i>车辆入校快速预约</a>
-                    </li>
-                  
-                    <li class="menu-title">更多功能</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('plugin_content/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa  fa-wrench"></i>入校须知修改</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside>
+    <div id="aside">
+    </div>
     <!-- /#left-panel -->
     <!-- Right Panel -->
-  <div id="right-panel" class="right-panel">
-
+    <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header">
-            <div class="top-left">
-                <div class="navbar-header">
-                    <a class="navbar-brand"><img src="/resources/images/logo_v5.png" alt="Logo"></a>
-                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
-                </div>
-            </div>
-        </header>
-        <!-- Header-->
+        <div id="header">
+        </div>
+        <!-- /#header -->
 
 
       
@@ -137,207 +79,206 @@
                             <div class="card-body">
                               
                               	<!--startprint1-->
-                                <br/>
-                                <br/>
-                                <br/>
-                                <h1  style=" text-align:center;">个人信息</h1>
-                                <br/>
-                                <br/>
-                                <br/>
-                                
-                              	<div class="print-div">
-                                    <div class="row" style="float:left;width:50%;">
-                                        <div class="col col-md-4">
-                                            <label class=" form-control-label">姓名：</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <p class="form-control-static">{$data.usr_name}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="float:right;width:50%;">
-                                        <div class="col col-md-4">
-                                            <label class=" form-control-label">身份：</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <p class="form-control-static">{$data.type}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                              
-                                <div class="print-div">
-                                    <div class="row" style="float:left;width:50%;">
-                                        <div class="col col-md-4">
-                                            <label class=" form-control-label">学号/职工号：</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <p class="form-control-static">{$data.usr_number}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="float:right;width:50%;">
-                                        <div class="col col-md-4">
-                                            <label class=" form-control-label">联系方式：</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <p class="form-control-static">{$data.usr_phone}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <br>
+                                <br>
+                                <h1 style=" text-align:center;">车证审核信息表</h1>
+                                <br>
+                                <br>
 
-                                <div class="print-div">
-                                    <div class="row" style="float:left;width:50%;">
-                                        <div class="col col-md-4">
-                                            <label class=" form-control-label"> 部门/专业：</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <p class="form-control-static">{$data.department}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="float:right;width:50%;"></div>
-                                </div>
+                          <!---->
+                          <div id="savehistory">
+                          <div class="userselect"></div>
 
-                                <br/>
-                                <hr/>
-                                <br/>
+                              <form align="center" action="{:url('god_hand/doAdd')}" method="post">   
 
-                                <div class="print-div">
-                                    <div class="row" style="float:left;width:50%;">
-                                        <div class="col col-md-4">
-                                            <label class=" form-control-label">车牌号码：</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <p class="form-control-static">{$data.car_number}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="float:right;width:50%;">
-                                        <div class="col col-md-4">
-                                            <label class=" form-control-label">车辆所有者：</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <p class="form-control-static">{$data.car_owner}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="print-div">
-                                    <div class="row" style="float:left;width:50%;">
-                                        <div class="col col-md-4">
-                                            <label class=" form-control-label">行驶证照片：</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <img src="{$data.car_card}" style="max-width:275px;"></img>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="float:right;width:50%;">
-                              		
-                                        <div class="col col-md-4">
-                                            <label class=" form-control-label">驾驶证照片：</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <img src="{$data.usr_card}" style="max-width:275px;"></img>
-                                        </div>
-                              		</div>
-                                </div>
-                      
-                      
-                      			
-                                <br/>
-                                <hr/>
-                                <br/>
-                  
-                 				<h1  style=" text-align:center;">{$plugin.title}</h1>
-                  
-                                <br/>
-                                <br/>
-                                <br/>
-                  
-                      			<div class="print-div">
-                                  <div class="row" style="float:left;width:100%;" >
-                                  	<div class="col col-md-2">
-                                     	<p  style="color:#000">{$plugin.content}</p>
-                                  	</div>
-                                  	<div class="col-12 col-md-10">
-                      				</div>
-                                  </div>
-                                </div>
-                      
-                                <br/>
-                                  
-                                <div class="print-div">
-                                  <div class="row" style="float:left;width:100%;" >
-                                  	<div class="col col-md-2">
-                                     	<label class=" form-control-label">签名：</label>
-                                  	</div>
-                                  	<div class="col-12 col-md-10">
-                      				</div>
-                                  </div>
-                                </div>
-                  
-                                <div class="print-div">
-                                  <div class="row" style="float:left;width:100%;" >
-                                  	<div class="col col-md-2">
-                                     	<label class=" form-control-label">日期：</label>
-                                  	</div>
-                                  	<div class="col-12 col-md-10">
-                      				</div>
-                                  </div>
-                                </div>
-                      			
+                                  <table width="80%" border="1" cellpadding="6" cellspacing="0" bordercolor="#BC1717" align="center">
+                                    <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">基本信息</font> </td>  </tr>		  
+                                    <tr>
+                                      <td width="50px" nowrap>姓名</td>
+                                      <td width="120px" nowrap><input type="text" style="width:80%" name="user_name" id = "user_name"/></td>
+                                      <td width="50px" nowrap>身份</td>
+                                      <td width="120px" nowrap>
+                                          <input type="radio" name="sex1" id="sex1" value="教师" checked="checked" />教师    
+                                          <input type="radio" name="sex1" id="sex1" value="学生" />学生 
+                                          <input type="radio" name="sex1" id="sex1" value="其他人员" />其他人员
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50px" nowrap>学号/职工号</td>
+                                      <td width="120px" nowrap><input type="text" style="width:80%" name="user_num" id = "user_num"/></td>
+                                      <td width="50px" nowrap>部门/专业</td>
+                                      <td width="120px" nowrap><input type="text" style="width:80%" name="user_department" id = "user_department"/></td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50px" nowrap>联系方式</td>
+                                      <td nowrap colspan="3"><input type="text" style="width:90%" name="user_num" id = "user_num"/></td>
+                                    </tr>
+                                    <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">车辆信息</font></td> </tr>
+
+                                    <tr>
+                                      <td width="50px" nowrap>车牌号码</td>
+                                      <td width="120px" nowrap><input type="text" style="width:80%" name="car_number" id = "car_number"/></td>
+                                      <td width="50px" nowrap>车辆所有者</td>
+                                      <td width="120px" nowrap><input type="text" style="width:80%" name="owner" id = "owner"/></td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50px" nowrap>行驶证照片</td>
+                                      <td  nowrap colspan="3">
+                                          <input id="fileInput" name="fileInput" type="file" onchange="processFiles(this.files)">
+                                          <br>
+                                          <img src="" id="myImage" name="myImage" onload='if (this.width>150 || this.height>150) if (this.width/this.height>150/150) this.width=150; else this.height=150;'/>  
+                                          <br>
+                                          <!--绘制画布-->
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50px" nowrap>驾驶证照片</td>
+                                      <td  nowrap colspan="3">
+                                          <input id="fileInput2" name="fileInput2" type="file" onchange="processFiles2(this.files)">
+                                          <br>
+                                          <img src="" id="myImage2" name="myImage2" onload='if (this.width>150 || this.height>150) if (this.width/this.height>150/150) this.width=150; else this.height=150;'/>  
+                                          <br>
+                                          <!--绘制画布-->
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50px" nowrap>附加证明材料</td>
+                                      <td  nowrap colspan="3">
+                                          <input id="fileInput3" name="fileInput3" type="file" onchange="processFiles3(this.files)">
+                                          <br>
+                                          <img src="" id="myImage3" name="myImage3" onload='if (this.width>150 || this.height>150) if (this.width/this.height>150/150) this.width=150; else this.height=150;'/>  
+                                          <br>
+                                          <!--绘制画布-->
+                                      </td>
+                                    </tr>
+                                    <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">其他</font></td> </tr>
+                                    <tr>
+                                      <td width="50px" nowrap>备注</td>
+                                      <td nowrap colspan="3" ><textarea rows="3" id="note" name="note" style="width: 80%"></textarea></td>
+                                    </tr><!---->
+                                  </table> 
+                                  <button type="submit"
+                                          class="btn btn-outline-danger btn-lg btn-block"
+                                          style="margin-top:15px">添加
+                                  </button>
+                              </form>  
+                          </div>	
+
+
+		
+							
                               <!--endprint1-->
-                                <br/>
-                                <hr/>
-                                <br/>
-                  			
-                                <div class="print-div">
-                                  <div class="row" style="float:left;width:30%;">
-                                      
-                                      <button  type="button" onclick=preview(1) class="btn btn-outline-primary btn-lg btn-block">
-                                        <i class="fa fa-check fa-lg"></i>&nbsp;
-                                        <span id="payment-button-amount">打印预览</span>
-                                      </button>
-                                      
-                                  </div>
-                                  <div class="row" style="float:left;width:5%;">
-                                      <p>  </p>
-                                  </div>
-                                  <div class="row" style="float:left;width:30%;">
-                                      
-                                      <button  type="button" onclick="javascrtpt:window.location.href='/manager/final_trial/pass/id/{$data.id}'" class="btn btn-outline-success btn-lg btn-block">
-                                        <i class="fa fa-check fa-lg"></i>&nbsp;
-                                        <span id="payment-button-amount">通过</span>
-                                      </button>
-                                      
-                                  </div>
-                                  <div class="row" style="float:left;width:5%;">
-                                      <p>  </p>
-                                  </div>
-                                  <div class="row" style="float:right;width:30%;">
-                                      
-                                      <button  type="button" onclick="javascrtpt:window.location.href='/manager/final_trial/refuse/id/{$data.id}'"  class="btn btn-outline-danger btn-lg btn-block">
-                                        <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                        <span id="payment-button-amount">拒绝</span>
-                                      </button>
-                  					
-                                  </div>
-                                </div>
                             </div><!-- .card-body -->
                         </div><!-- .card -->
                     </div><!-- .col-md-12 -->
   
   
                 </div><!-- .row -->
-            </div><!-- .animated -->
-        </div><!-- .content -->
-      
-      
-
-    <!-- /#right-panel -->
-
+            </div> <!-- .animated -->
+        </div> <!-- .content -->
+	</div>
     <!-- /#right-panel -->
 
     <script src="/resources/javascript/vendor/jquery-2.1.4.min.js"></script>
+	<script src="/resources/javascript/popper.min.js"></script>
     <script src="/resources/javascript/plugins.js"></script>
-    <script src="/resources/javascript/main.js"></script>
+    <script>
+    	$("#aside").load("/resources/pages/aside.html");
+    	$("#header").load("/resources/pages/header.html");
+        function loadJS(url){
+          var Script = document.createElement('script');
+          Script.setAttribute('src', url);
+          Script.setAttribute('type', 'text/javascript');
+          document.body.appendChild(Script);
+          return Script;
+        }
+      	loadJS("/resources/javascript/main.js")
+	</script>
+
+<script type="text/javascript">
+    (function(){
+        var tab_tit  = document.getElementById('think_page_trace_tab_tit').getElementsByTagName('span');
+        var tab_cont = document.getElementById('think_page_trace_tab_cont').getElementsByTagName('div');
+        var open     = document.getElementById('think_page_trace_open');
+        var close    = document.getElementById('think_page_trace_close').children[0];
+        var trace    = document.getElementById('think_page_trace_tab');
+        var cookie   = document.cookie.match(/thinkphp_show_page_trace=(\d\|\d)/);
+        var history  = (cookie && typeof cookie[1] != 'undefined' && cookie[1].split('|')) || [0,0];
+        open.onclick = function(){
+            trace.style.display = 'block';
+            this.style.display = 'none';
+            close.parentNode.style.display = 'block';
+            history[0] = 1;
+            document.cookie = 'thinkphp_show_page_trace='+history.join('|')
+        }
+        close.onclick = function(){
+            trace.style.display = 'none';
+            this.parentNode.style.display = 'none';
+            open.style.display = 'block';
+            history[0] = 0;
+            document.cookie = 'thinkphp_show_page_trace='+history.join('|')
+        }
+        for(var i = 0; i < tab_tit.length; i++){
+            tab_tit[i].onclick = (function(i){
+                return function(){
+                    for(var j = 0; j < tab_cont.length; j++){
+                        tab_cont[j].style.display = 'none';
+                        tab_tit[j].style.color = '#999';
+                    }
+                    tab_cont[i].style.display = 'block';
+                    tab_tit[i].style.color = '#000';
+                    history[1] = i;
+                    document.cookie = 'thinkphp_show_page_trace='+history.join('|')
+                }
+            })(i)
+        }
+        parseInt(history[0]) && open.click();
+        tab_tit[history[1]].click();
+    })();
+	
+	
+	
+	//载入图片	
+	function processFiles(files) {
+      var file = files[0];
+      var reader = new FileReader();
+      reader.onload = function (e) {
+			showXY(e.target.result);  		  
+      };
+      reader.readAsDataURL(file);
+    }
+	function showXY(source)
+	{  
+		var img = document.getElementById("myImage");  //图片
+		img.src = source;  //为图片赋值
+	} 
+		function processFiles2(files) {
+      var file = files[0];
+      var reader = new FileReader();
+      reader.onload = function (e) {
+			showXY2(e.target.result);  		  
+      };
+      reader.readAsDataURL(file);
+    }
+	function showXY2(source)
+	{  
+		var img = document.getElementById("myImage2");  //图片
+		img.src = source;  //为图片赋值
+	} 
+		function processFiles3(files) {
+      var file = files[0];
+      var reader = new FileReader();
+      reader.onload = function (e) {
+			showXY3(e.target.result);  		  
+      };
+      reader.readAsDataURL(file);
+    }
+	function showXY3(source)
+	{  
+		var img = document.getElementById("myImage3");  //图片
+		img.src = source;  //为图片赋值
+	} 
+</script>
 
 
-</body>
-</html>
+</body></html>

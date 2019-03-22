@@ -3,6 +3,8 @@ namespace app\manager\controller;
 
 use think\View;
 use think\Controller;
+use think\Model;
+use think\Db;
 
 class GodHand extends Controller
 {
@@ -16,10 +18,34 @@ class GodHand extends Controller
             $this->redirect(url('login/index'));
         }else{
             $view = new View();
-          	
+          
         	return $view->fetch('add');
         }
     }
+  	
+  	//处理管理员添加车证的函数
+  
+  	public function doAdd(){
+            $param = input('post.');
+      		//左边是wjj，右边是wwr
+      		$post_data_add = [
+                  'usr_name'=>$param['user_name'],
+            	  'type'=>$param['sex1'],
+                  'usr_number'=>$param['user_num'],
+              	  'car_number'=>$param['car_number'],
+                  'department'=>$param['user_department'],
+                  'pass_date'=>date('Y-m-d H:i:s',time()),
+                  'car_owner'=>$param['owner'],
+             	  'note'=>$param['note'],
+            ];
+            $res = Db::name('car_license') -> insert($post_data_add);
+      		if($res != 0)
+                $this->success('修改成功', 'manage/index');
+            else
+                $this->error('修改失败');
+          	//return json($param);
+    } 
+      
     public function loss()
     {
         //数据库连接、查询

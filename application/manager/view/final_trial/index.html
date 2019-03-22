@@ -60,69 +60,15 @@
 
 <body>
     <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="{:url('manage/index')}"><i class="menu-icon fa fa-laptop"></i>首页 </a>
-                    </li>
-                    <li class="menu-title">车证审核</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('first_trial/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>初步审核</a>
-                    </li>
-                    <li class="menu-item-has-children active dropdown">
-                        <a href="{:url('final_trial/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>最终审核</a>
-                    </li>
-                    <li class="menu-title">信息查询</li><!-- /.menu-title -->
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('credential_search/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>固定车证信息查询</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('people_appoint_search/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>人员入校预约查询</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('car_appoint_search/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-line-chart"></i>车辆入校预约查询</a>
-                    </li>
-                    <li class="menu-title">信息管理</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>固定车证管理</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{:url('god_hand/add')}">快速添加</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{:url('god_hand/loss')}">车证挂失</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{:url('god_hand/invalid')}">车证失效</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('god_hand/peopleappoint')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>人员入校快速预约</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('god_hand/carappoint')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa fa-line-chart"></i>车辆入校快速预约</a>
-                    </li>
-                  
-                    <li class="menu-title">更多功能</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{:url('plugin_content/index')}" class="dropdown-toggle" aria-expanded="false"> <i class="menu-icon fa  fa-wrench"></i>入校须知修改</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside>
+    <div id="aside">
+    </div>
     <!-- /#left-panel -->
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
-
         <!-- Header-->
-        <header id="header" class="header">
-            <div class="top-left">
-                <div class="navbar-header">
-                    <a class="navbar-brand"><img src="/resources/images/logo_v5.png" alt="Logo"></a>
-                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
-                </div>
-            </div>
-        </header>
-        <!-- Header-->
+        <div id="header">
+        </div>
+        <!-- /#header -->
 
         <div class="content">
             <div class="animated fadeIn">
@@ -176,8 +122,21 @@
     <!-- /#right-panel -->
 
     <script src="/resources/javascript/vendor/jquery-2.1.4.min.js"></script>
+	<script src="/resources/javascript/popper.min.js"></script>
     <script src="/resources/javascript/plugins.js"></script>
-    <script src="/resources/javascript/main.js"></script>
+  	
+  	<script>
+        function loadJS(url){
+          var Script = document.createElement('script');
+          Script.setAttribute('src', url);
+          Script.setAttribute('type', 'text/javascript');
+          document.body.appendChild(Script);
+          return Script;
+        }
+    	$("#aside").load("/resources/pages/aside.html");
+    	$("#header").load("/resources/pages/header.html");
+      	loadJS("/resources/javascript/main.js")
+	</script>
   
     <script src="/resources/javascript/lib/data-table/datatables.min.js"></script>
     <script src="/resources/javascript/lib/data-table/dataTables.bootstrap.min.js"></script>
@@ -190,11 +149,5 @@
     <script src="/resources/javascript/lib/data-table/buttons.colVis.min.js"></script>
     <script src="/resources/javascript/init/datatables-init.js"></script>
 
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
-  </script>
 </body>
 </html>

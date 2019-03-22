@@ -29,7 +29,6 @@ class PluginContent extends Controller
           	echo "您好，请登录<br/>";
             $this->redirect(url('login/index'));
         }else{
-            //需要修改
             $param = input('post.');
           	if(in_array("Page2",$param)){
             	$id = 2;

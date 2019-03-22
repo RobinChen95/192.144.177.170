@@ -68,16 +68,17 @@
         <div id="header">
         </div>
         <!-- /#header -->
-        <div class="clearfix"></div>
+        <div id="clearfix"></div>
+        <div id="content">
+          <p id="u11">123
+      	</p></div>
     </div>
     <!-- /#right-panel -->
 
     <script src="/resources/javascript/vendor/jquery-2.1.4.min.js"></script>
-	<script src="/resources/javascript/popper.min.js"></script>
+  	
     <script src="/resources/javascript/plugins.js"></script>
-    <script>
-    	$("#aside").load("/resources/pages/aside.html");
-    	$("#header").load("/resources/pages/header.html");
+  	<script>
         function loadJS(url){
           var Script = document.createElement('script');
           Script.setAttribute('src', url);
@@ -85,9 +86,10 @@
           document.body.appendChild(Script);
           return Script;
         }
+    	$("#aside").load("/resources/pages/aside.html");
+    	$("#header").load("/resources/pages/header.html");
       	loadJS("/resources/javascript/main.js")
 	</script>
-
 
 
 </body>
