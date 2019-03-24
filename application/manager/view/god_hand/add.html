@@ -65,8 +65,6 @@
         </div>
         <!-- /#header -->
 
-
-      
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
@@ -85,11 +83,11 @@
                                 <br>
                                 <br>
 
-                          <!---->
                           <div id="savehistory">
                           <div class="userselect"></div>
-
-                              <form align="center" action="{:url('god_hand/doAdd')}" method="post">   
+							<!--action="{:url('god_hand/doAdd')}"-->
+                            <!--本次表单采用的是先上传表单文字再上传图片的方法，让图片找到应该更新数据行插入，中间有0.5秒的间隔，可能不安全，通过onsubmit="send_form()"实现-->
+                              <form align="center" action="{:url('god_hand/doAdd')}" enctype="multipart/form-data" id="tf"  method="post" onsubmit="send_form()">   
 
                                   <table width="80%" border="1" cellpadding="6" cellspacing="0" bordercolor="#BC1717" align="center">
                                     <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">基本信息</font> </td>  </tr>		  
@@ -111,7 +109,7 @@
                                     </tr>
                                     <tr>
                                       <td width="50px" nowrap>联系方式</td>
-                                      <td nowrap colspan="3"><input type="text" style="width:90%" name="user_num" id = "user_num"/></td>
+                                      <td nowrap colspan="3"><input type="text" style="width:90%" name="usr_phone" id = "usr_phone"/></td>
                                     </tr>
                                     <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">车辆信息</font></td> </tr>
 
@@ -122,7 +120,7 @@
                                       <td width="120px" nowrap><input type="text" style="width:80%" name="owner" id = "owner"/></td>
                                     </tr>
                                     <tr>
-                                      <td width="50px" nowrap>行驶证照片</td>
+                                      <td width="50px" nowrap>行驶证照片（可选）</td>
                                       <td  nowrap colspan="3">
                                           <input id="fileInput" name="fileInput" type="file" onchange="processFiles(this.files)">
                                           <br>
@@ -132,7 +130,7 @@
                                       </td>
                                     </tr>
                                     <tr>
-                                      <td width="50px" nowrap>驾驶证照片</td>
+                                      <td width="50px" nowrap>驾驶证照片（可选）</td>
                                       <td  nowrap colspan="3">
                                           <input id="fileInput2" name="fileInput2" type="file" onchange="processFiles2(this.files)">
                                           <br>
@@ -142,7 +140,7 @@
                                       </td>
                                     </tr>
                                     <tr>
-                                      <td width="50px" nowrap>附加证明材料</td>
+                                      <td width="50px" nowrap>附加证明材料（可选）</td>
                                       <td  nowrap colspan="3">
                                           <input id="fileInput3" name="fileInput3" type="file" onchange="processFiles3(this.files)">
                                           <br>
@@ -153,35 +151,33 @@
                                     </tr>
                                     <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">其他</font></td> </tr>
                                     <tr>
-                                      <td width="50px" nowrap>备注</td>
+                                      <td width="50px" nowrap>备注（可选）</td>
                                       <td nowrap colspan="3" ><textarea rows="3" id="note" name="note" style="width: 80%"></textarea></td>
                                     </tr><!---->
-                                  </table> 
-                                  <button type="submit"
+                                  </table>
+                                  <input type="submit"
+                                          id = "mybtn"
+                                         value="添加"
                                           class="btn btn-outline-danger btn-lg btn-block"
-                                          style="margin-top:15px">添加
-                                  </button>
+                                          style="margin-top:15px"
+                                         />
                               </form>  
                           </div>	
-
-
-		
-							
                               <!--endprint1-->
                             </div><!-- .card-body -->
                         </div><!-- .card -->
                     </div><!-- .col-md-12 -->
-  
-  
                 </div><!-- .row -->
             </div> <!-- .animated -->
         </div> <!-- .content -->
 	</div>
     <!-- /#right-panel -->
 
-    <script src="/resources/javascript/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/resources/javascript/jquery-2.1.4.min.js"></script>
 	<script src="/resources/javascript/popper.min.js"></script>
     <script src="/resources/javascript/plugins.js"></script>
+  	<!-- 添加jquery -->
+  	<script src="/resources/javascript/jquery-1.10.2.min.js"></script>
     <script>
     	$("#aside").load("/resources/pages/aside.html");
     	$("#header").load("/resources/pages/header.html");
@@ -195,89 +191,74 @@
       	loadJS("/resources/javascript/main.js")
 	</script>
 
-<script type="text/javascript">
-    (function(){
-        var tab_tit  = document.getElementById('think_page_trace_tab_tit').getElementsByTagName('span');
-        var tab_cont = document.getElementById('think_page_trace_tab_cont').getElementsByTagName('div');
-        var open     = document.getElementById('think_page_trace_open');
-        var close    = document.getElementById('think_page_trace_close').children[0];
-        var trace    = document.getElementById('think_page_trace_tab');
-        var cookie   = document.cookie.match(/thinkphp_show_page_trace=(\d\|\d)/);
-        var history  = (cookie && typeof cookie[1] != 'undefined' && cookie[1].split('|')) || [0,0];
-        open.onclick = function(){
-            trace.style.display = 'block';
-            this.style.display = 'none';
-            close.parentNode.style.display = 'block';
-            history[0] = 1;
-            document.cookie = 'thinkphp_show_page_trace='+history.join('|')
-        }
-        close.onclick = function(){
-            trace.style.display = 'none';
-            this.parentNode.style.display = 'none';
-            open.style.display = 'block';
-            history[0] = 0;
-            document.cookie = 'thinkphp_show_page_trace='+history.join('|')
-        }
-        for(var i = 0; i < tab_tit.length; i++){
-            tab_tit[i].onclick = (function(i){
-                return function(){
-                    for(var j = 0; j < tab_cont.length; j++){
-                        tab_cont[j].style.display = 'none';
-                        tab_tit[j].style.color = '#999';
-                    }
-                    tab_cont[i].style.display = 'block';
-                    tab_tit[i].style.color = '#000';
-                    history[1] = i;
-                    document.cookie = 'thinkphp_show_page_trace='+history.join('|')
-                }
-            })(i)
-        }
-        parseInt(history[0]) && open.click();
-        tab_tit[history[1]].click();
-    })();
-	
-	
-	
+<script type="text/javascript" >
+    var formData = new FormData();
+    var btn = document.getElementById("mybtn"); 
 	//载入图片	
 	function processFiles(files) {
       var file = files[0];
       var reader = new FileReader();
       reader.onload = function (e) {
-			showXY(e.target.result);  		  
+			showXY(e.target.result);
       };
-      reader.readAsDataURL(file);
-    }
-	function showXY(source)
-	{  
-		var img = document.getElementById("myImage");  //图片
-		img.src = source;  //为图片赋值
-	} 
-		function processFiles2(files) {
-      var file = files[0];
-      var reader = new FileReader();
-      reader.onload = function (e) {
-			showXY2(e.target.result);  		  
-      };
-      reader.readAsDataURL(file);
-    }
-	function showXY2(source)
-	{  
-		var img = document.getElementById("myImage2");  //图片
-		img.src = source;  //为图片赋值
-	} 
-		function processFiles3(files) {
-      var file = files[0];
-      var reader = new FileReader();
-      reader.onload = function (e) {
-			showXY3(e.target.result);  		  
-      };
-      reader.readAsDataURL(file);
-    }
-	function showXY3(source)
-	{  
-		var img = document.getElementById("myImage3");  //图片
-		img.src = source;  //为图片赋值
-	} 
+      reader.readAsDataURL(file); 
+	  formData.append("image1", (files[0]));
+      }
+      function showXY(source){
+          var img = document.getElementById("myImage");  //图片
+          img.src = source;  //为图片赋值
+      }
+
+      function processFiles2(files) {
+        var file = files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+              showXY2(e.target.result);  		  
+        };
+        reader.readAsDataURL(file);
+        formData.append("image2", (files[0]));
+      }
+      function showXY2(source){  
+          var img = document.getElementById("myImage2");  //图片
+          img.src = source;  //为图片赋值
+      }
+
+      function processFiles3(files) {
+        var file = files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+              showXY3(e.target.result);  		  
+        };
+        reader.readAsDataURL(file);
+        formData.append("image3", (files[0]));
+      }
+      function showXY3(source){  
+          var img = document.getElementById("myImage3");  //图片
+          img.src = source;  //为图片赋值
+      } 
+  	  //同时上传图片与表单内容
+  	  function send_form(){
+      
+	  //ajax请求
+	  $.ajax({
+            type: "post",
+            url:  "https://www.messj.xyz/api/addpic/save",
+            data: formData,
+            cache : false,
+            dataType: 'json',  //不能用jsonp，会报错
+            processData: false, // 告诉jQuery不要去处理发送的数据
+            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+            //xhrFields:{withCredentials:true},
+            async: true,    //默认是true：异步，false：同步。
+            success: function (data) {
+              	console.log("ok");
+            },
+            error: function (data) {
+              	console.log(data);
+              	console.log("没收到数据");
+            },
+        });
+      } 
 </script>
 
 

@@ -34,7 +34,7 @@ class PluginContent extends Controller
             	$id = 2;
             }else if(in_array("Page1",$param)){
             	$id = 1;
-            }elseif(in_array("Page0",$param)){
+            }else if(in_array("Page0",$param)){
             	$id = 0;
             }
             $post_form = [

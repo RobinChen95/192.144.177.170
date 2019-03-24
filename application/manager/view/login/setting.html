@@ -20,6 +20,16 @@
 	<link href="/resources/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
 	
   	<style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }	
+      	.w1{width:200px;}
+      	.paddingl{padding-left:5%;}
+      	.paddingr{padding-right:3%;}
         .swich{width:200px;}
         .swich .box{width:60px;height:30px;background:#ccc;border-radius:20px;transition: all .5s ease;}
         .swich input{display:none;}
@@ -57,7 +67,7 @@
                             <div class="card-body">
                                 <div class="row form-group">
                                     <div class="row" style="float:left;width:24%;margin-right:3%;margin-left:9.5%; overflow:hidden; text-overflow:ellipsis;">
-                                        <button type="button" class="btn btn-outline-danger btn-lg btn-block" name="r" id="Page1">教师权限设置</button>
+                                        <button type="button" class="btn btn-outline-danger btn-lg btn-block" name="r" id="Page1">教职工权限设置</button>
                                     </div>
                                     <div class="row" style="float:left;width:24%;margin-right:3%;margin-left:3%;overflow:hidden; text-overflow:ellipsis;">
                                         <button type="button" class="btn btn-outline-danger btn-lg btn-block" name="r" id="Page2">学生权限设置</button>
@@ -66,13 +76,15 @@
                                         <button type="button" class="btn btn-outline-danger btn-lg btn-block" name="r" id="Page3">服务商权限设置</button>
                                     </div>
                                 </div>
-
+                              <div>
+								<hr style="height:1px;"/>
+                                <br/>
+                              </div>
                                 <div name="pages">
                                     <form role="form" action="{:url('login/changeSet')}" method="post">
-                                      	<br/>
                                         <div class="row form-group">
                                             <input type="hidden" id="Page0" name="Page0" value="Page0"/>
-                                            <div class="col col-md-3">
+                                            <div class="col col-md-3 paddingl">
                                                 <label for="password-input" class=" form-control-label">固定车证申请功能：</label>
                                             </div>
                                             <div class="col-12 col-md-9">
@@ -86,7 +98,7 @@
                                         </div>
                                       
                                         <div class="row form-group">
-                                            <div class="col col-md-3">
+                                            <div class="col col-md-3 paddingl">
                                                 <label for="password-input" class=" form-control-label">临时车辆入校预约功能：</label>
                                             </div>
                                             <div class="col-12 col-md-9">
@@ -100,7 +112,7 @@
                                         </div>
                                       
                                         <div class="row form-group">
-                                            <div class="col col-md-3">
+                                            <div class="col col-md-3 paddingl">
                                                 <label for="password-input" class=" form-control-label">临时人员入校预约功能：</label>
                                             </div>
                                             <div class="col-12 col-md-9">
@@ -112,7 +124,53 @@
                                                 </div>
                                             </div>
                                         </div>
+                                      
                                         <div class="row form-group">
+                                            <div class="col col-md-3 paddingl">
+                                                <label for="password-input" class=" form-control-label">已有部门清单：</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <div>
+                                        			{foreach name="depart" item="vo"}
+                                                  		<p style="color:#000">{$vo['id']}.{$vo['department']}</p>
+                                        			{/foreach}
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 paddingl">
+                                                <label for="password-input" class=" form-control-label">删除部门：</label>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div>
+                                        			<input type="number" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="ime-mode:Disabled" class="w1" id="deleteid" name="deleteid" placeholder="请输入待删除部门的编号"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div>
+                                                  	<p>比如，想删除“电子部门”专业，则填写清单中对应的部门编号“2”</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 paddingl">
+                                                <label for="password-input" class=" form-control-label">添加部门：</label>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div>
+                                        			<input type="text" class="w1" id="addmajor" name="addmajor" placeholder="请输入待添加专业的名称"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div>
+                                                  	<p>比如，想添加“电子信息”专业，则填写“电子信息”</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="row form-group paddingl paddingr">
                                                 <button type="submit" class="btn btn-outline-danger btn-lg btn-block" style="margin-top:15px">
                                                     <i class="fa fa-lock fa-lg"></i>&nbsp;
                                                     <span id="payment-button-amount">确认修改</span>
@@ -123,10 +181,9 @@
                                 <!-- pages1 -->
                                 <div name="pages" style="display:none">
                                     <form role="form" action="{:url('login/changeSet')}" method="post">
-                                      	<br/>
                                         <div class="row form-group">
                                             <input type="hidden" id="Page1" name="Page1" value="Page1"/>
-                                            <div class="col col-md-3">
+                                            <div class="col col-md-3 paddingl">
                                                 <label for="password-input" class=" form-control-label">固定车证申请功能：</label>
                                             </div>
                                             <div class="col-12 col-md-9">
@@ -140,7 +197,7 @@
                                         </div>
                                       
                                         <div class="row form-group">
-                                            <div class="col col-md-3">
+                                            <div class="col col-md-3 paddingl">
                                                 <label for="password-input" class=" form-control-label">临时车辆入校预约功能：</label>
                                             </div>
                                             <div class="col-12 col-md-9">
@@ -154,7 +211,7 @@
                                         </div>
                                       
                                         <div class="row form-group">
-                                            <div class="col col-md-3">
+                                            <div class="col col-md-3 paddingl">
                                                 <label for="password-input" class=" form-control-label">临时人员入校预约功能：</label>
                                             </div>
                                             <div class="col-12 col-md-9">
@@ -166,7 +223,53 @@
                                                 </div>
                                             </div>
                                         </div>
+                                      
                                         <div class="row form-group">
+                                            <div class="col col-md-3 paddingl">
+                                                <label for="password-input" class=" form-control-label">已有专业清单：</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <div>
+                                        			{foreach name="major" item="vo"}
+                                                  		<p style="color:#000">{$vo['id']}.{$vo['major']}</p>
+                                        			{/foreach}
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 paddingl">
+                                                <label for="password-input" class=" form-control-label">删除专业：</label>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div>
+                                        			<input type="number" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="ime-mode:Disabled" class="w1" id="deleteid" name="deleteid" placeholder="请输入待删除专业的编号"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div>
+                                                  	<p>比如，想删除“电子信息”专业，则填写清单中对应的专业编号“2”</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 paddingl">
+                                                <label for="password-input" class=" form-control-label">添加专业：</label>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div>
+                                        			<input type="text" class="w1" id="addmajor" name="addmajor" placeholder="请输入待添加专业的名称"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div>
+                                                  	<p>比如，想添加“电子信息”专业，则填写“电子信息”</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="row form-group paddingl paddingr">
                                                 <button type="submit" class="btn btn-outline-danger btn-lg btn-block" style="margin-top:15px">
                                                     <i class="fa fa-lock fa-lg"></i>&nbsp;
                                                     <span id="payment-button-amount">确认修改</span>
@@ -177,10 +280,9 @@
                                 <!-- pages2 -->
                                 <div name="pages" style="display:none">
                                     <form role="form" action="{:url('login/changeSet')}" method="post">
-                                      	<br/>
                                         <div class="row form-group">
                                             <input type="hidden" id="Page2" name="Page2" value="Page2"/>
-                                            <div class="col col-md-3">
+                                            <div class="col col-md-3 paddingl">
                                                 <label for="password-input" class=" form-control-label">固定车证申请功能：</label>
                                             </div>
                                             <div class="col-12 col-md-9">
@@ -194,7 +296,7 @@
                                         </div>
                                       
                                         <div class="row form-group">
-                                            <div class="col col-md-3">
+                                            <div class="col col-md-3 paddingl">
                                                 <label for="password-input" class=" form-control-label">临时车辆入校预约功能：</label>
                                             </div>
                                             <div class="col-12 col-md-9">
@@ -208,7 +310,7 @@
                                         </div>
                                       
                                         <div class="row form-group">
-                                            <div class="col col-md-3">
+                                            <div class="col col-md-3 paddingl">
                                                 <label for="password-input" class=" form-control-label">临时人员入校预约功能：</label>
                                             </div>
                                             <div class="col-12 col-md-9">
@@ -220,7 +322,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row form-group">
+                                        <div class="row form-group paddingl paddingr">
                                                 <button type="submit" class="btn btn-outline-danger btn-lg btn-block" style="margin-top:15px">
                                                     <i class="fa fa-lock fa-lg"></i>&nbsp;
                                                     <span id="payment-button-amount">确认修改</span>

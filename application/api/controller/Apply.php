@@ -7,6 +7,20 @@ class Apply extends Controller
 {
   	public function test(){
     	$param = input('post.');
+      	if($param['type'] == "teacher"){
+          	$access = db("setting")->where("id",1)->find();
+        } else if($param['type'] == "student"){
+          	$access = db("setting")->where("id",2)->find();
+        }  else {
+          	$access = db("setting")->where("id",3)->find();
+        } 
+        if($access["f1_access"] == 0){
+            $data = [
+                'code' => 103,
+                'result' => "",
+            ];
+            return json($data);		
+        }
         $file = request()->file('image');
     
         // 移动到框架应用根目录/public/uploads/ 目录下
@@ -59,6 +73,12 @@ class Apply extends Controller
         return json($data);
       
     }
+  	/*
+    ** code = 200 通过
+    ** code = 101 插入消息失败
+    ** code = 102 中间步骤更新消息失败
+    ** code = 103 权限不足
+    */
     public function save()
     {
         /*
@@ -75,8 +95,25 @@ class Apply extends Controller
         ];
         */
     	$param = input('post.');
+      	if($param['type'] == "teacher"){
+          	$param['type'] = "教职工";
+          	$access = db("setting")->where("id",1)->find();
+        } else if($param['type'] == "student"){
+          	$param['type'] = "学生";
+          	$access = db("setting")->where("id",2)->find();
+        }  else {
+          	$param['type'] = "服务商";
+          	$access = db("setting")->where("id",3)->find();
+        } 
+        if($access["f1_access"] == 0){
+            $data = [
+                'code' => 103,
+                'result' => "",
+            ];
+            return json($data);		
+        }
         $file = request()->file('image');
-    
+    	
         // 移动到框架应用根目录/public/uploads/ 目录下
         if($file){
             $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
@@ -116,7 +153,7 @@ class Apply extends Controller
             $newdata['status'] = $param['status'];
             $ret = $model->updateForm($postdata, $newdata);
             if($ret != 1){
-                $code = 103;
+                $code = 102;
             }
         }
         $data = [

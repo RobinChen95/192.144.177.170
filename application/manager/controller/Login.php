@@ -79,6 +79,8 @@ class Login extends Controller
         }else{
             $view = new View();
           	$view->data = db('setting')->select();
+          	$view->major = db('major')->where("isvalid",1)->select();
+          	$view->depart = db('department')->where("isvalid",1)->select();
             return $view->fetch('setting');
         }
     }
@@ -142,9 +144,9 @@ class Login extends Controller
             if($res != 0){
                 session('user_id', null);
                 session('user_name', null);
-                $this->success('修改成功', 'login/index');
+                $this->success('修改密码成功', 'login/index');
             }else
-                $this->error('修改失败');
+                $this->error('修改密码失败');
         }
     }
   	
@@ -157,6 +159,9 @@ class Login extends Controller
         }else{
             //需要修改
             $param = input('post.');
+        	$res1 = 0;
+        	$res2 = 0;
+          	$res3 = 0;
           	if(in_array("Page2",$param)){
             	$id = 3;
                 $postdata = [
@@ -165,6 +170,17 @@ class Login extends Controller
                       'f3_access'=> (int)$param['f9_access'],
                 ];
             }else if(in_array("Page1",$param)){
+              	if($param["deleteid"] != ""){
+              		$res1 = db('major') -> where("id",(int)$param["deleteid"]) -> update(["isvalid" => 0,]);
+                }
+              	if($param["addmajor"] != ""){
+                  	$rs =   db('major') -> where(["major" => $param["addmajor"]]) ->select();
+                    if(count($rs)!=0){
+              			$res2 = db('major') -> where(["major" => $param["addmajor"],"isvalid" => 0,]) ->update(["isvalid" => 1,]);
+                    }else{
+                    	$res2 = db('major') -> insert(["major" => $param["addmajor"],]);
+                    }
+                }
             	$id = 2;
                 $postdata = [
                       'f1_access'=> (int)$param['f4_access'],
@@ -172,6 +188,17 @@ class Login extends Controller
                       'f3_access'=> (int)$param['f6_access'],
                 ];
             }elseif(in_array("Page0",$param)){
+              	if($param["deleteid"] != ""){
+              		$res1 = db('department') -> where("id",(int)$param["deleteid"]) -> update(["isvalid" => 0,]);
+                }
+              	if($param["addmajor"] != ""){
+                  	$rs =   db('department') -> where(["department" => $param["addmajor"]]) ->select();
+                    if(count($rs)!=0){
+              			$res2 = db('department') -> where(["department" => $param["addmajor"],]) ->update(["isvalid" => 1,]);
+                    }else {
+                    	$res2 = db('department') -> insert(["department" => $param["addmajor"],]);
+                    }
+                }
             	$id = 1;
                 $postdata = [
                       'f1_access'=> (int)$param['f1_access'],
@@ -182,11 +209,12 @@ class Login extends Controller
             $post_form = [
                   'id'=>  $id,
             ];
-            $res = db('setting') -> where($post_form) -> update($postdata);
+            $res3 = db('setting') -> where($post_form) -> update($postdata);
+            $res = $res1+$res2+$res3;
             if($res != 0)
-                $this->success('修改成功', 'manage/index');
+                $this->success('成功修改'.$res."条数据", 'login/setting');
             else
-                $this->error('修改失败');
+                $this->error('未发生任何设置修改');
         }
     }
   	
@@ -227,7 +255,7 @@ class Login extends Controller
 			
 		/*	Db('表名') 数据库助手函数*/
         if(Db('users') -> insert($data)){		//添加数据
-          return $this->success('注册成功');	
+          return $this->success('注册成功', 'manage/index');	
         }else{
           return $this->error('注册失败');
         }
