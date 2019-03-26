@@ -21,17 +21,16 @@ jQuery(document).ready(function($) {
 	}else if(urll[0] == "car_appoint_search"){
       	$('#carsearch').addClass('active'); 
 	}else if(urll[0] == "god_hand" ){
-        if(urll[1] == "add" || urll[1] == "loss" || urll[1] == "invalid" ){
-      		$('#fixedmanage').addClass('active'); 
-    	}else if(urll[1] == "peopleappoint"){
+        if(urll[1] == "peopleappoint"){
       		$('#manmanage').addClass('active'); 
         }else if(urll[1] == "carappoint"){
       		$('#carmanage').addClass('active'); 
-        }
+        }else{
+      		$('#fixedmanage').addClass('active'); 
+    	} 
 	}else if(urll[0] == "plugin_content"){
       	$('#esm1').addClass('active'); 
 	}
-  
 	// Menu Trigger
 	$('#menuToggle').on('click', function(event) {
 		var windowWidth = $(window).width();   		 

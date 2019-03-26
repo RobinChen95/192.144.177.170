@@ -68,6 +68,50 @@
         <div id="header">
         </div>
         <!-- /#header -->
+      
+      	      	        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">车证挂失</strong>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>持有人姓名</th>
+                                            <th>持有人身份</th>
+                                            <th>证件号</th>
+                                            <th>联系方式</th>
+                                            <th>车牌号</th>
+                                            <th>更多</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {foreach name="data" item="vo"}
+                                            <tr>
+                                                <td>{$vo.usr_name}</td>
+                                                <td>{$vo.type}</td>
+                                                <td>{$vo.usr_number}</td>
+                                                <td>{$vo.usr_phone}</td>
+                                                <td>{$vo.car_number}</td>
+                                                <td>
+                                                  <button  type="button" onclick="javascrtpt:window.location.href='/manager/god_hand/lost/id/{$vo.id}'" class="btn btn-outline-secondary btn-sm btn-block">查看</button>
+                                              	</td>
+                                            </tr>
+                                        {/foreach}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
+      
         <div class="clearfix"></div>
     </div>
     <!-- /#right-panel -->

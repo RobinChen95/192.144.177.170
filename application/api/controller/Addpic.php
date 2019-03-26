@@ -1,4 +1,11 @@
 <?php 
+
+/*
+  这次使用的方法是图片和表单数据分开存
+  图片和表单数据同时从前端出发插入数据库
+  表单先插入数据库，等待0.5秒后插入图片数据
+  这里存的是图片数据
+*/
 namespace app\api\controller;
 
 use think\Controller;
@@ -6,8 +13,7 @@ use think\Db;
 use think\Request;
 use think\Model;
 
-class Addpic extends Controller
-{
+class Addpic extends Controller{
   	//从数据库获取固定车证办理的插件数据
     public function save(){
         // 跨域申请需要显示取得许可
@@ -53,6 +59,5 @@ class Addpic extends Controller
           return json("ok");
         else
           return json("failed");
-
     }
 }

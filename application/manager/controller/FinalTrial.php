@@ -51,6 +51,14 @@ class FinalTrial extends Controller
             if($res != 0){
               	$data = db('application_form')->where('id',$id)->find();
                 $t = strtotime('now');
+                if($data['type'] == "教师"||$data['type'] == "教职工"||$data['type'] == "teacher"){
+                	$res = db('setting')->where('id',1)->find();
+                }else if($data['type'] == "学生"||$data['type'] == "student"){
+                	$res = db('setting')->where('id',2)->find();
+                }else{
+                	$res = db('setting')->where('id',3)->find();
+            	}
+          		$n = $res['valid_year'];
                 $postdata = [
                       'type'=> $data['type'],
                       'usr_name' => $data['usr_name'],
@@ -63,7 +71,7 @@ class FinalTrial extends Controller
                       'usr_card' => $data['usr_card'],
                       'other_img' => $data['other_img'],
                       'pass_date' => date('Y-m-d H:i:s',$t),
-                      'valid_date' => date('Y-m-d H:i:s',$t+365*24*60*60),
+                      'valid_date' => date('Y-m-d H:i:s',$t+365*24*60*60*$n),
                   	
                 ];
                 db('car_license')->insert($postdata);

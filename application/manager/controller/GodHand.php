@@ -18,7 +18,6 @@ class GodHand extends Controller
             $this->redirect(url('login/index'));
         }else{
             $view = new View();
-          
         	return $view->fetch('add');
         }
     }
@@ -64,10 +63,26 @@ class GodHand extends Controller
             $this->redirect(url('login/index'));
         }else{
             $view = new View();
-          	
-        	return $view->fetch('loss');
+          	$view->data = db('car_license')->where("isvalid", 1)->where("status", 1)->select();
+            return $view->fetch('loss');
         }
     }
+      
+    public function recover()
+    {
+        //数据库连接、查询
+        //如果没有则访问api并存储
+        $user_name = session('user_name');
+        if(empty($user_name)){
+          	echo "您好，请登录<br/>";
+            $this->redirect(url('login/index'));
+        }else{
+            $view = new View();
+          	$view->data = db('car_license')->where("isvalid", 1)->where("status", 2)->select();
+        	return $view->fetch('recover');
+        }
+    }
+  
     public function invalid()
     {
         //数据库连接、查询
@@ -78,10 +93,11 @@ class GodHand extends Controller
             $this->redirect(url('login/index'));
         }else{
             $view = new View();
-          	
+          	$view->data = db('car_license')->where("isvalid", 1)->where("status", 1)->select();
         	return $view->fetch('invalid');
         }
     }
+  
     public function carappoint()
     {
         //数据库连接、查询
@@ -92,10 +108,43 @@ class GodHand extends Controller
             $this->redirect(url('login/index'));
         }else{
             $view = new View();
-          	
         	return $view->fetch('carappoint');
         }
     }
+  
+  	public function docarappoint(){
+        //数据库连接、查询
+        //如果没有则访问api并存储
+        $user_name = session('user_name');
+        if(empty($user_name)){
+          	echo "您好，请登录<br/>";
+            $this->redirect(url('login/index'));
+        }else{
+            $param = input('post.');
+          	$date_now = date('Y-m-d H:i:s',time());
+      		$post_data_carappoint = [
+              'usr_name'=>"管理员添加",
+              'type'=>"------",
+              'usr_number'=>"------",
+              'department'=>"------",
+              'usr_phone'=>"------",
+              'period'=>"全天",
+              'driver_name'=>$param['driver_name'],
+              'car_number'=>$param['car_number'],
+              'appoint_data'=>$param['appoint_data'],
+              'driver_phone'=>$param['driver_phone'],
+              'reason'=>$param['reason'],
+              'note'=>$param['note'],
+              'apply_date'=>$date_now,
+            ];
+            $res = Db::name('car_appointment_form') -> insert($post_data_carappoint);
+      		if($res != 0)
+                $this->success('修改成功', 'manage/index');
+            else
+                $this->error('修改失败');
+        }
+    }
+  
     public function peopleappoint()
     {
         //数据库连接、查询
@@ -106,8 +155,136 @@ class GodHand extends Controller
             $this->redirect(url('login/index'));
         }else{
             $view = new View();
-          	
         	return $view->fetch('peopleappoint');
+        }
+    }
+  
+    public function dopeopleappoint(){
+        //数据库连接、查询
+        //如果没有则访问api并存储
+        $user_name = session('user_name');
+        if(empty($user_name)){
+          	echo "您好，请登录<br/>";
+            $this->redirect(url('login/index'));
+        }else{
+            $param = input('post.');
+          	$date_now = date('Y-m-d H:i:s',time());
+      		$post_data_peopleappoint = [
+              'usr_name'=>"管理员添加",
+              'type'=>"------",
+              'usr_number'=>"------",
+              'department'=>"------",
+              'usr_phone'=>"------",
+              'period'=>"全天",
+              'people_name'=>$param['people_name'],
+              'people_number'=>$param['people_number'],
+              'appoint_data'=>$param['appoint_data'],
+              'people_phone'=>$param['people_phone'],
+              'reason'=>$param['reason'],
+              'note'=>$param['note'],
+              'apply_date'=>$date_now,
+            ];
+            $res = Db::name('people_appointment_form') -> insert($post_data_peopleappoint);
+      		if($res != 0)
+                $this->success('修改成功', 'manage/index');
+            else
+                $this->error('修改失败');
+        }
+    }
+  
+    public function lost($id)
+    {
+        //数据库连接、查询
+        //如果没有则访问api并存储
+        $user_name = session('user_name');
+        if(empty($user_name)){
+          	echo "您好，请登录<br/>";
+            $this->redirect(url('login/index'));
+        }else{
+            $view = new View();
+            $view->data = db('car_license')->where('id',$id)->find();
+            return $view->fetch('lost');
+        }
+    }    
+  
+    public function losted($id)
+    {
+        //数据库连接、查询
+        //如果没有则访问api并存储
+        $user_name = session('user_name');
+        if(empty($user_name)){
+          	echo "您好，请登录<br/>";
+            $this->redirect(url('login/index'));
+        }else{
+          	$res=db('car_license')->where('id',$id)->update(['status' => 2]);
+            if($res != 0)
+                $this->success('修改成功', 'god_hand/loss');
+            else
+                $this->error('修改失败');
+        }
+    } 
+  
+	public function recoverize($id)
+    {
+        //数据库连接、查询
+        //如果没有则访问api并存储
+        $user_name = session('user_name');
+        if(empty($user_name)){
+          	echo "您好，请登录<br/>";
+            $this->redirect(url('login/index'));
+        }else{
+            $view = new View();
+            $view->data = db('car_license')->where('id',$id)->find();
+            return $view->fetch('recoverize');
+        }
+    }
+  
+	public function recoverized($id)
+    {
+        //数据库连接、查询
+        //如果没有则访问api并存储
+        $user_name = session('user_name');
+        if(empty($user_name)){
+          	echo "您好，请登录<br/>";
+            $this->redirect(url('login/index'));
+        }else{
+          	$res=db('car_license')->where('id',$id)->update(['status' => 1]);
+            if($res != 0)
+                $this->success('修改成功', 'god_hand/recover');
+            else
+                $this->error('修改失败');
+        }
+    }
+  
+	public function invalidize($id)
+    {
+        //数据库连接、查询
+        //如果没有则访问api并存储
+        $user_name = session('user_name');
+        if(empty($user_name)){
+          	echo "您好，请登录<br/>";
+            $this->redirect(url('login/index'));
+        }else{
+            $view = new View();
+            $view->data = db('car_license')->where('id',$id)->find();
+            return $view->fetch('invalidize');
+        }
+    }
+  
+	public function invalidized($id)
+    {
+        //数据库连接、查询
+        //如果没有则访问api并存储
+        $user_name = session('user_name');
+        if(empty($user_name)){
+          	echo "您好，请登录<br/>";
+            $this->redirect(url('login/index'));
+        }else{
+          	$res=db('car_license')->where('id',$id)->update(['status' => 0]);
+            if($res != 0)
+                $this->success('修改成功', 'god_hand/invalid');
+            else
+                $this->error('修改失败');
         }
     }
 }

@@ -168,6 +168,7 @@ class Login extends Controller
                       'f1_access'=> (int)$param['f7_access'],
                       'f2_access'=> (int)$param['f8_access'],
                       'f3_access'=> (int)$param['f9_access'],
+                      'valid_year'=> (int)$param['year'],
                 ];
             }else if(in_array("Page1",$param)){
               	if($param["deleteid"] != ""){
@@ -186,6 +187,7 @@ class Login extends Controller
                       'f1_access'=> (int)$param['f4_access'],
                       'f2_access'=> (int)$param['f5_access'],
                       'f3_access'=> (int)$param['f6_access'],
+                      'valid_year'=> (int)$param['year'],
                 ];
             }elseif(in_array("Page0",$param)){
               	if($param["deleteid"] != ""){
@@ -204,6 +206,7 @@ class Login extends Controller
                       'f1_access'=> (int)$param['f1_access'],
                       'f2_access'=> (int)$param['f2_access'],
                       'f3_access'=> (int)$param['f3_access'],
+                      'valid_year'=> (int)$param['year'],
                 ];
             }
             $post_form = [

@@ -16,7 +16,7 @@ class CredentialSearch extends Controller
             $this->redirect(url('login/index'));
         }else{
             $view = new View();
-          	$view->data = db('car_license')->select();
+          	$view->data = db('car_license')->where("isvalid", 1)->select();
           	
         	return $view->fetch();
         }
