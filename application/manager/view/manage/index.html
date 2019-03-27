@@ -20,6 +20,13 @@
 	<link href="/resources/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
 
    	<style>
+        html {
+           height: 100%;
+        }
+
+        body {
+           height: 100%;
+        }
       	tr{text-align:center} 
       	td{text-align:center} 
     	#weatherWidget .currentDesc {
@@ -59,19 +66,34 @@
     </style>
 </head>
 
-<body>
+<body >
     <!-- Left Panel -->
     <div id="aside">
     </div>
     <!-- /#left-panel -->
     <!-- Right Panel -->
-    <div id="right-panel" class="right-panel">
+    <div id="right-panel" class="right-panel" >
         <!-- Header-->
         <div id="header">
         </div>
         <!-- /#header -->
-      <div class="content">
+      <div class="content" >
             <div class="animated fadeIn">
+              	<!--  Traffic  -->
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="card">
+                          	<br/>
+                          	<div style="margin-left:30px;">
+                              
+                          		<h2>欢迎您回来，管理员。</h2>
+                          	</div>
+                          	<br/>
+                      	</div>
+                    </div><!-- /# column -->
+                </div>
+                <!--  /Traffic -->
                 
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -203,7 +225,6 @@
               
             </div><!-- .animated -->
         </div><!-- .content -->
-        <div class="clearfix"></div>
     </div>
     <!-- /#right-panel -->
 
@@ -218,19 +239,6 @@
           document.body.appendChild(Script);
           return Script;
         }
-      
-        // Counter Number
-        $('.count').each(function () {
-            $(this).prop('Counter',0).animate({
-                Counter: $(this).text()
-            }, {
-                duration: 3000,
-                easing: 'swing',
-                step: function (now) {
-                    $(this).text(Math.ceil(now));
-                }
-            });
-        });
 
     	$("#aside").load("/resources/pages/aside.html");
     	$("#header").load("/resources/pages/header.html");

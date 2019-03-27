@@ -4,6 +4,7 @@ namespace app\manager\controller;
 use think\View;
 use think\Controller;
 use think\Model;
+use think\Request;
 use think\Db;
 
 class PluginContent extends Controller
@@ -46,10 +47,25 @@ class PluginContent extends Controller
                   'content'=> $param['content'],
             ];
             $res = Db::name('plugin_content') -> where($post_form) -> update($postdata);
-            if($res != 0)
+            if($res != 0){
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => "修改须知操作成功",
+                ];
+                db("operation")->insert($oper_data);
                 $this->success('修改成功', 'manage/index');
-            else
+            }else{
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => "修改须知操作失败",
+                ];
+                db("operation")->insert($oper_data);
                 $this->error('修改失败');
+            }
         }
     }
 }

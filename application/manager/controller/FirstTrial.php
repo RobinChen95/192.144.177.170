@@ -3,6 +3,7 @@ namespace app\manager\controller;
 
 use think\View;
 use think\Controller;
+use think\Request;
 
 class FirstTrial extends Controller
 {
@@ -46,10 +47,26 @@ class FirstTrial extends Controller
         }else{
             $view = new View();
             $res = db('application_form')->where('status',1)->where('id',$id)->update(['status' => 2]);
-            if($res != 0)
+            if($res != 0){
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => $id . "号申请初审通过操作成功",
+                ];
+                db("operation")->insert($oper_data);
                 $this->success('修改成功', 'first_trial/index');
-            else
+            }
+            else{
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => $id . "号申请初审通过操作失败",
+                ];
+                db("operation")->insert($oper_data);
                 $this->error('修改失败');
+            }
         }
     }
       public function refuse($id)
@@ -62,10 +79,25 @@ class FirstTrial extends Controller
             $this->redirect(url('login/index'));
         }else{
             $res=db('application_form')->where('status',1)->where('id',$id)->update(['status' => 3]);
-            if($res != 0)
+            if($res != 0){
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => $id . "号申请初审拒绝操作成功",
+                ];
+                db("operation")->insert($oper_data);
                 $this->success('修改成功', 'first_trial/index');
-            else
+            }else{
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => $id . "号申请初审拒绝操作失败",
+                ];
+                db("operation")->insert($oper_data);
                 $this->error('修改失败');
+            }
         }
     }
 }

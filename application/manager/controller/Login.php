@@ -4,6 +4,7 @@ namespace app\manager\controller;
 use think\Controller;
 use think\View;
 use think\Validate;
+use think\Request;
 
 class Login extends Controller
 {
@@ -42,7 +43,13 @@ class Login extends Controller
     	// 记录用户登录信息
     	session('user_id', $has['id']); 
     	session('user_name', $has['user_name']);
-    	
+    	$request = Request::instance();
+      	$oper_data = [
+          "ip" => $request->ip(),
+          "user" => $has['user_name'],
+          "oper" => "登录操作",
+        ];
+     	db("operation")->insert($oper_data);
     	$this->redirect(url('manage/index'));
     }
   
@@ -87,9 +94,17 @@ class Login extends Controller
   
     public function loginOut()
     {
+      	$user_name = session('user_name');
+    	
+        $request = Request::instance();
+        $oper_data = [
+          "ip" => $request->ip(),
+          "user" => $user_name,
+          "oper" => "退出登录",
+        ];
+        db("operation")->insert($oper_data);
     	session('user_id', null);
     	session('user_name', null);
-    	
     	$this->redirect(url('login/index'));
     }
   
@@ -142,11 +157,26 @@ class Login extends Controller
           
           	$res = db('users') -> where($data) -> update($newdata);
             if($res != 0){
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => "修改密码成功",
+                ];
+                db("operation")->insert($oper_data);
                 session('user_id', null);
                 session('user_name', null);
                 $this->success('修改密码成功', 'login/index');
-            }else
+            }else{
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => "修改密码失败",
+                ];
+                db("operation")->insert($oper_data);
                 $this->error('修改密码失败');
+            }
         }
     }
   	
@@ -214,9 +244,16 @@ class Login extends Controller
             ];
             $res3 = db('setting') -> where($post_form) -> update($postdata);
             $res = $res1+$res2+$res3;
-            if($res != 0)
+            if($res != 0){
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => "修改设置",
+                ];
+                db("operation")->insert($oper_data);
                 $this->success('成功修改'.$res."条数据", 'login/setting');
-            else
+            }else
                 $this->error('未发生任何设置修改');
         }
     }
@@ -246,7 +283,9 @@ class Login extends Controller
         if(!$validate->check($testdata)){
             return $this->error($validate->getError());
         }
-		
+		$res = db("users")->where('user_name', $param['user_name'])->count();
+      	if($res != 0)
+          return $this->error('注册失败,该用户已被注册');
       	$pd = md5($param['password']);
         $npd = $pd . "pku";
       
@@ -258,8 +297,22 @@ class Login extends Controller
 			
 		/*	Db('表名') 数据库助手函数*/
         if(Db('users') -> insert($data)){		//添加数据
+          $request = Request::instance();
+          $oper_data = [
+            "ip" => $request->ip(),
+            "user" => $user_name,
+            "oper" => "添加新用户成功",
+          ];
+          db("operation")->insert($oper_data);
           return $this->success('注册成功', 'manage/index');	
         }else{
+          $request = Request::instance();
+          $oper_data = [
+            "ip" => $request->ip(),
+            "user" => $user_name,
+            "oper" => "添加新用户失败",
+          ];
+          db("operation")->insert($oper_data);
           return $this->error('注册失败');
         }
     }

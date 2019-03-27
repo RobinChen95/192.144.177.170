@@ -31,6 +31,7 @@ jQuery(document).ready(function($) {
 	}else if(urll[0] == "plugin_content"){
       	$('#esm1').addClass('active'); 
 	}
+  
 	// Menu Trigger
 	$('#menuToggle').on('click', function(event) {
 		var windowWidth = $(window).width();   		 
@@ -68,5 +69,18 @@ jQuery(document).ready(function($) {
 		
 	});
   
+    // Counter Number
+    $('.count').each(function () {
+      var aa = $(this).text();
+      $(this).prop('Counter',0).animate({
+        Counter: aa
+      }, {
+        duration: 1500,
+        easing: 'swing',
+        step: function (now) {
+          $(this).text(Math.ceil(now));
+        }
+      });
+    });
  
 });

@@ -3,6 +3,7 @@ namespace app\manager\controller;
 
 use think\View;
 use think\Controller;
+use think\Request;
 
 class FinalTrial extends Controller
 {
@@ -75,10 +76,25 @@ class FinalTrial extends Controller
                   	
                 ];
                 db('car_license')->insert($postdata);
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => $id . "号申请终审通过操作成功",
+                ];
+                db("operation")->insert($oper_data);
                 $this->success('修改成功', 'final_trial/index');
             }
-            else
+            else{
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => $id . "号申请终审通过操作成功",
+                ];
+                db("operation")->insert($oper_data);
                 $this->error('修改失败');
+            }
         }
     }
       public function refuse($id)
@@ -91,10 +107,26 @@ class FinalTrial extends Controller
             $this->redirect(url('login/index'));
         }else{
             $res=db('application_form')->where('status',2)->where('id',$id)->update(['status' => 5]);
-            if($res != 0)
+            
+            if($res != 0){
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => $id . "号申请终审拒绝操作成功",
+                ];
+                db("operation")->insert($oper_data);
                 $this->success('修改成功', 'final_trial/index');
-            else
+            }else{
+                $request = Request::instance();
+                $oper_data = [
+                  "ip" => $request->ip(),
+                  "user" => $user_name,
+                  "oper" => $id . "号申请终审拒绝操作失败",
+                ];
+                db("operation")->insert($oper_data);
                 $this->error('修改失败');
+            }
         }
     }
 }
