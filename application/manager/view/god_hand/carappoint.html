@@ -53,6 +53,10 @@
         #cellPaiChart{
             height: 160px;
         }
+        .hint{
+          color:red;
+          display:none;
+        }
 
     </style>
 </head>
@@ -100,36 +104,48 @@
                             <!-- -->
                               <form align="center" action="{:url('god_hand/docarappoint')}" method="post">   
 
-                                  <table width="80%" border="1" cellpadding="6" cellspacing="0" bordercolor="#BC1717" align="center">
-                                    <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">驾驶人信息</font> </td>  </tr>		  
+                                  <table width="80%" border="1" cellpadding="6" cellspacing="0" bordercolor="#CB1E36" align="center">
+                                    <tr><td align="center" colspan="4" style="background-color:#CB1E36"><font color="#FFFFFF">驾驶人信息</font> </td>  </tr>		  
                                     <tr>
                                       <td width="50px" nowrap>驾驶人姓名</td>
-                                      <td width="120px" nowrap><input type="text" style="width:80%" name="driver_name" id = "driver_name" placeholder="请输入驾驶人姓名 例如 张三"/></td>
+                                      <td width="120px" nowrap>
+                                        <input class="form-control" type="text" style="width:60%" name="driver_name" id = "driver_name" placeholder="请输入驾驶人姓名 例如 张三" onblur="check_info(this.id)" oninput="validate_button()"/>
+                                        <span class="hint" id="driver_name_check" name="driver_name_check"> </span>
+                                      </td>
                                       <td width="50px" nowrap>车牌号码</td>
-									  <td width="120px" nowrap><input type="text" style="width:80%" name="car_number" id = "car_number" placeholder="输入车牌号码 例 京A 000001"/></td>
+									  <td width="120px" nowrap>
+                                        <input class="form-control" type="text" style="width:80%" name="car_number" id = "car_number" placeholder="例 京A 000001" onblur="check_info(this.id)" oninput="validate_button()"/>
+                                        <span class="hint" id="car_number_check" name="car_number_check"> </span>
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td width="50px" nowrap>入校日期</td>
                                       <!--这个地方是翁嘉进打错了appoint_data应该是appoint_date，但是对应到数据库也有，就不改了 -->
-                                      <td width="120px" nowrap><input type="date" style="width:80%" name="appoint_data" id = "appoint_data"onchange="get_date()"/></td>
+                                      <td width="120px" nowrap>
+                                        <input class="form-control" type="date" style="width:60%" name="appoint_data" id = "appoint_data"onchange="get_date()"/>
+                                      </td>
                                       <td width="50px" nowrap>联系电话</td>
-                                      <td width="120px" nowrap><input type="text" style="width:80%" name="driver_phone" id = "driver_phone" placeholder="请输入11位手机号码"/></td>
+                                      <td width="120px" nowrap>
+                                        <input class="form-control" type="text" style="width:80%" name="driver_phone" id = "driver_phone" placeholder="请输入11位手机号码" onblur="check_info(this.id)" oninput="validate_button()"/>
+                                        <span class="hint" id="driver_phone_check" name="driver_phone_check"> </span>
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td width="50px" nowrap>入校原因(可选)</td>
-                                      <td nowrap colspan="3" ><textarea rows="3" id="reason" name="reason" style="width: 80%" placeholder="请输入入校原因（可不填）"></textarea></td>
+                                      <td nowrap colspan="3" ><textarea class="form-control" rows="3" id="reason" name="reason" style="width: 80%" placeholder="请输入入校原因（可不填）"></textarea></td>
                                     </tr><!---->
-                                    <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">车辆信息</font></td> </tr>
+                                    <tr><td align="center" colspan="4" style="background-color:#CB1E36"><font color="#FFFFFF">车辆信息</font></td> </tr>
                                     <tr>
                                       <td width="50px" nowrap>备注（可选）</td>
-                                      <td nowrap colspan="3" ><textarea rows="3" id="note" name="note" style="width: 80%" placeholder="请输入备注（可不填）"></textarea></td>
+                                      <td nowrap colspan="3" ><textarea class="form-control" rows="3" id="note" name="note" style="width: 80%" placeholder="请输入备注（可不填）"></textarea></td>
                                     </tr><!---->
                                   </table>
                                   <input type="submit"
                                           id = "mybtn"
-                                         value="添加"
+                                         value="请将信息填写完整之后添加"
                                           class="btn btn-outline-danger btn-lg btn-block"
-                                          style="margin-top:15px"
+                                          style="margin-top:15px;width:80%"
+                                          disabled="disabled"
                                          />
                               </form>  
                           </div>	
@@ -160,6 +176,32 @@
 	</script>
 
     <script type="text/javascript" >
+      var driver_name_check = document.getElementById("driver_name"); 
+      var car_number_check = document.getElementById("car_number"); 
+      var driver_phone_check = document.getElementById("driver_phone"); 
+      var btn = document.getElementById("mybtn"); 
+
+      function check_info(id){
+          var check_id = document.getElementById(id);
+          var show_warning = document.getElementById(id+"_check");
+          if(check_id.value==""){
+              show_warning.innerHTML = "输入不能为空";
+              show_warning.style.display='inline';
+          }
+          else{
+              show_warning.innerHTML = "";
+              show_warning.style.display='none';
+          }
+      }
+
+      function validate_button(){
+        // 每次用户离开输入框都检查一遍，用以激活按钮
+        if(driver_name_check.value!="" && car_number_check.value!="" && driver_phone_check.value!=""){
+          btn.disabled="";
+          btn.value="确认添加";
+        }
+      }
+      
       //获取当前时间并显示到前端
       // 给input date设置默认值
       var now = new Date();

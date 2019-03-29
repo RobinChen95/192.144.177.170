@@ -49,6 +49,11 @@
         #cellPaiChart{
             height: 160px;
         }
+      	
+      .hint{
+      	color:red;
+        display:none;
+      }
 		
     </style>
 </head>
@@ -89,35 +94,57 @@
                             <!--本次表单采用的是先上传表单文字再上传图片的方法，让图片找到应该更新数据行插入，中间有0.5秒的间隔，可能不安全，通过onsubmit="send_form()"实现-->
                               <form align="center" action="{:url('god_hand/doAdd')}" enctype="multipart/form-data" id="tf"  method="post" onsubmit="send_form()">   
 
-                                  <table width="80%" border="1" cellpadding="6" cellspacing="0" bordercolor="#BC1717" align="center">
-                                    <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">基本信息</font> </td>  </tr>		  
+                                  <table width="80%" border="1" cellpadding="6" cellspacing="0" bordercolor="#CB1E36" align="center">
+                                    <tr><td align="center" colspan="4" style="background-color:#CB1E36"><font color="#FFFFFF">基本信息</font> </td>  </tr>		  
                                     <tr>
                                       <td width="50px" nowrap>姓名</td>
-                                      <td width="120px" nowrap><input type="text" style="width:80%" name="user_name" id = "user_name" placeholder="请输入姓名 例如 张三"/></td>
+                                      <td width="120px" nowrap>
+                                        <input class="form-control" type="text" style="width:60%" name="user_name" id = "user_name" placeholder="请输入姓名 例如 张三" onblur="check_info(this.id)" oninput="validate_button()" />
+                                        <span class="hint" id="user_name_check" name="user_name_check"> </span>
+                                      </td>
                                       <td width="50px" nowrap>身份</td>
                                       <td width="120px" nowrap>
-                                          <input type="radio" name="sex1" id="sex1" value="教师" checked="checked" />教师    
-                                          <input type="radio" name="sex1" id="sex1" value="学生" />学生 
-                                          <input type="radio" name="sex1" id="sex1" value="其他人员" />其他人员
+                                        &nbsp&nbsp&nbsp&nbsp
+                                          <input type="radio" name="sex1" id="sex1" value="教师" checked="checked" />  教师  
+                                        &nbsp&nbsp&nbsp&nbsp
+                                          <input type="radio" name="sex1" id="sex1" value="学生" />  学生  
+                                        &nbsp&nbsp&nbsp&nbsp
+                                          <input type="radio" name="sex1" id="sex1" value="其他人员" />  其他人员  
+                                        &nbsp&nbsp&nbsp&nbsp
                                       </td>
                                     </tr>
                                     <tr>
                                       <td width="50px" nowrap>学号/职工号</td>
-                                      <td width="120px" nowrap><input type="text" style="width:80%" name="user_num" id = "user_num" placeholder="请输入学号/职工号 例如 1801210215"/></td>
+                                      <td width="120px" nowrap>
+                                        <input class="form-control" type="text" style="width:60%" name="user_num" id = "user_num" placeholder="请输入学号/职工号" onblur="check_info(this.id)" oninput="validate_button()"/>
+                                        <span class="hint" id="user_num_check" name="user_num_check"> </span>
+                                      </td>
                                       <td width="50px" nowrap>部门/专业</td>
-                                      <td width="120px" nowrap><input type="text" style="width:80%" name="user_department" id = "user_department" placeholder="请输入部门/专业 例如 软件工程"/></td>
+                                      <td width="120px" nowrap>
+                                        <input class="form-control" type="text" style="width:60%" name="user_department" id = "user_department" placeholder="例 软件工程" onblur="check_info(this.id)" oninput="validate_button()"/>
+                                      	<span class="hint" id="user_department_check" name="user_department_check"> </span>
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td width="50px" nowrap>联系方式</td>
-                                      <td nowrap colspan="3"><input type="text" style="width:90%" name="usr_phone" id = "usr_phone" placeholder="请输入11位手机号"/></td>
+                                      <td nowrap colspan="3">
+                                        <input class="form-control" type="text" style="width:60%" name="usr_phone" id = "usr_phone" placeholder="请输入11位手机号" onblur="check_info(this.id)" oninput="validate_button()"/>
+                                        <span class="hint" id="usr_phone_check" name="usr_phone_check"> </span>
+                                      </td>
                                     </tr>
-                                    <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">车辆信息</font></td> </tr>
+                                    <tr><td align="center" colspan="4" style="background-color:#CB1E36"><font color="#FFFFFF">车辆信息</font></td> </tr>
 
                                     <tr>
                                       <td width="50px" nowrap>车牌号码</td>
-                                      <td width="120px" nowrap><input type="text" style="width:80%" name="car_number" id = "car_number" placeholder="请输入车牌号 例如 京A 000001"/></td>
+                                      <td width="120px" nowrap>
+                                        <input class="form-control" type="text" style="width:60%" name="car_number" id = "car_number" placeholder="例 京A 000001" onblur="check_info(this.id)" oninput="validate_button()"/>
+                                      	<span class="hint" id="car_number_check" name="car_number_check"> </span>
+                                      </td>
                                       <td width="50px" nowrap>车辆所有者</td>
-                                      <td width="120px" nowrap><input type="text" style="width:80%" name="owner" id = "owner" placeholder="请输入姓名 例如 张三"/></td>
+                                      <td width="120px" nowrap>
+                                        <input class="form-control" type="text" style="width:60%" name="owner" id = "owner" placeholder="请输入姓名 例如 张三" onblur="check_info(this.id)" oninput="validate_button()"/>
+                                      	<span class="hint" id="owner_check" name="owner_check"> </span>
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td width="50px" nowrap>行驶证照片（可选）</td>
@@ -149,17 +176,18 @@
                                           <!--绘制画布-->
                                       </td>
                                     </tr>
-                                    <tr><td align="center" colspan="4" style="background-color:#BC1717"><font color="#FFFFFF">其他</font></td> </tr>
+                                    <tr><td align="center" colspan="4" style="background-color:#CB1E36"><font color="#FFFFFF">其他</font></td> </tr>
                                     <tr>
                                       <td width="50px" nowrap>备注（可选）</td>
-                                      <td nowrap colspan="3" ><textarea rows="3" id="note" name="note" style="width: 80%" placeholder="请输入备注（可不填）"></textarea></td>
+                                      <td nowrap colspan="3" ><textarea class="form-control" rows="3" id="note" name="note" style="width: 80%" placeholder="请输入备注（可不填）"></textarea></td>
                                     </tr><!---->
                                   </table>
                                   <input type="submit"
                                           id = "mybtn"
-                                         value="添加"
-                                          class="btn btn-outline-danger btn-lg btn-block"
-                                          style="margin-top:15px"
+                                         value="请将信息填写完整后添加"
+                                         class="btn btn-outline-danger btn-lg btn-block"
+                                         style="margin-top:15px;width:80%"
+                                         disabled="disabled"
                                          />
                               </form>  
                           </div>	
@@ -192,8 +220,38 @@
 	</script>
 
 <script type="text/javascript" >
+  
     var formData = new FormData();
-    var btn = document.getElementById("mybtn"); 
+  	// 检查每一项输入是否为空
+  	var user_name_check = document.getElementById("user_name"); 
+    var user_num_check = document.getElementById("user_num"); 
+    var user_department_check = document.getElementById("user_department"); 
+    var usr_phone_check = document.getElementById("usr_phone"); 
+    var car_number_check = document.getElementById("car_number"); 
+    var owner_check = document.getElementById("owner"); 
+  	var btn = document.getElementById("mybtn"); 
+ 
+  	function check_info(id){
+      	var check_id = document.getElementById(id);
+      	var show_warning = document.getElementById(id+"_check");
+    	if(check_id.value==""){
+          	show_warning.innerHTML = "输入不能为空";
+        	show_warning.style.display='inline';
+        }
+      	else{
+        	show_warning.innerHTML = "";
+        	show_warning.style.display='none';
+        }
+    }
+  
+  	function validate_button(){
+      // 每次用户离开输入框都检查一遍，用以激活按钮
+      if(user_name_check.value!="" && user_num_check.value!="" && user_department_check.value!="" && usr_phone_check.value!="" && car_number_check.value!="" && owner_check.value!=""){
+        btn.disabled="";
+		btn.value="确认添加";
+      }
+    }
+  
 	//载入图片	
 	function processFiles(files) {
       var file = files[0];

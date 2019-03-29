@@ -62,6 +62,26 @@
         #cellPaiChart{
             height: 160px;
         }
+      
+      	#div1{
+		width: 1080px;
+		height: 208px;
+		margin: 100px auto;
+		position: relative;
+		overflow: hidden;
+        }
+        #div1 ul{
+            position:absolute;
+            left: 0;
+            top: 0;
+        }
+        #div1 ul li {
+            float: left;
+            width: 200px;
+            height: 208px;
+            list-style: none;
+            margin-left: 10px;
+        }
 
     </style>
 </head>
@@ -96,77 +116,88 @@
                 <!--  /Traffic -->
                 
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-flat-color-1">
                             <div class="card-body">
-                                <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-1">
-                                        <i class="pe-7s-airplay"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">{$data.r1}</span></div>
-                                            <div class="stat-heading">条等待初审</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="card-left pt-1 float-left">
+                                    <h3 class="mb-0 fw-r">
+                                        <span class="count">{$data.r1}</span>
+                                    </h3>
+                                    <p class="text-light mt-1 m-0">条等待初审</p>
+                                </div><!-- /.card-left -->
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-2">
-                                        <i class="pe-7s-albums"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">{$data.r2}</span></div>
-                                            <div class="stat-heading">条等待终审</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="card-right float-right text-right">
+                                    <i class="icon fade-5 icon-lg pe-7s-airplay"></i>
+                                </div><!-- /.card-right -->
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-3">
-                                        <i class="pe-7s-browser"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">{$data.r3}</span></div>
-                                            <div class="stat-heading">条申请已处理</div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-4">
-                                        <i class="pe-7s-users"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">{$data.r4}</span></div>
-                                            <div class="stat-heading">个有效车证</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
+                    <!--/.col-->
+                  
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-flat-color-6">
+                            <div class="card-body">
+                                <div class="card-left pt-1 float-left">
+                                    <h3 class="mb-0 fw-r">
+                                        <span class="count">{$data.r2}</span>
+                                    </h3>
+                                    <p class="text-light mt-1 m-0">条等待终审</p>
+                                </div><!-- /.card-left -->
+
+                                <div class="card-right float-right text-right">
+                                    <i class="icon fade-5 icon-lg pe-7s-albums"></i>
+                                </div><!-- /.card-right -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/.col-->
+
+                  
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-flat-color-3">
+                            <div class="card-body">
+                                <div class="card-left pt-1 float-left">
+                                    <h3 class="mb-0 fw-r">
+                                        <span class="count">{$data.r3}</span>
+                                    </h3>
+                                    <p class="text-light mt-1 m-0">条申请已处理</p>
+                                </div><!-- /.card-left -->
+
+                                <div class="card-right float-right text-right">
+                                    <i class="icon fade-5 icon-lg pe-7s-browser"></i>
+                                </div><!-- /.card-right -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/.col-->
+
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-flat-color-2">
+                            <div class="card-body">
+                                <div class="card-left pt-1 float-left">
+                                    <h3 class="mb-0 fw-r">
+                                        <span class="count">{$data.r4}</span>
+                                    </h3>
+                                    <p class="text-light mt-1 m-0">个有效车证</p>
+                                </div><!-- /.card-left -->
+
+                                <div class="card-right float-right text-right">
+                                    <i class="icon fade-5 icon-lg pe-7s-users"></i>
+                                </div><!-- /.card-right -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/.col-->
+                  
                 </div>
                 <!--  Traffic  -->
                 <div class="row">
@@ -222,16 +253,16 @@
                     </div><!-- /# column -->
                 </div>
                 <!--  /Traffic -->
-              
+
             </div><!-- .animated -->
         </div><!-- .content -->
     </div>
     <!-- /#right-panel -->
-
     <script src="/resources/javascript/vendor/jquery-2.1.4.min.js"></script>
 	<script src="/resources/javascript/popper.min.js"></script>
     <script src="/resources/javascript/plugins.js"></script>
     <script>
+
         function loadJS(url){
           var Script = document.createElement('script');
           Script.setAttribute('src', url);
