@@ -8,7 +8,7 @@ namespace app\manager\model;
 use think\Model;
 use think\Db;
 
-class credential_search extends Model
+class CredentialSearch extends Model
 {
     // 获取数据库信息
     public function getinfo()
