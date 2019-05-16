@@ -10,12 +10,12 @@ class Getdata extends Controller
     public function all()
     {
     	$param = input('post.');
-        $major = db("major")->where("isvalid",1)->select();
+        $major = db("major")->where("is_valid",1)->select();
       	$fmajor = array("请选择");
         for($i=0; $i<count($major); $i++){
           	$fmajor[$i+1] = $major[$i]["major"];
         }
-        $depart = db("department")->where("isvalid",1)->select();
+        $depart = db("department")->where("is_valid",1)->select();
       	$fdepart = array("请选择");
         for($i=0; $i<count($depart); $i++){
           	$fdepart[$i+1] = $depart[$i]["department"];

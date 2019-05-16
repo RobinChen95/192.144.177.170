@@ -55,7 +55,7 @@ class PluginContent extends Controller
                   "oper" => "修改须知操作成功",
                 ];
                 db("operation")->insert($oper_data);
-                $this->success('修改成功', 'manage/index');
+                $this->success('修改成功', 'plugin_content/index');
             }else{
                 $request = Request::instance();
                 $oper_data = [

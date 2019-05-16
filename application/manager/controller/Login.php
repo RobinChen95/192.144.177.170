@@ -64,8 +64,8 @@ class Login extends Controller
           
           	//将获取的设置信息、专业部门信息绑定到界面
           	$view->data = db('setting')->select();
-          	$view->major = db('major')->where("isvalid",1)->select();
-          	$view->depart = db('department')->where("isvalid",1)->select();
+          	$view->major = db('major')->where("is_valid",1)->select();
+          	$view->depart = db('department')->where("is_valid",1)->select();
           
           	//重定向到设置修改界面
             return $view->fetch('setting');
@@ -261,14 +261,15 @@ class Login extends Controller
               
               	//专业表删除操作
               	if($param["deleteid"] != ""){
-              		$res1 = db('major') -> where("id",(int)$param["deleteid"]) -> update(["isvalid" => 0,]);
+              		$data = db('major') -> where("id",(int)$param["deleteid"]) -> find();
+              		$res1 = db('major') -> where("id",(int)$param["deleteid"]) -> update(["is_valid" => 0,"major"=>$data["id"].$data["major"],]);
                 }
               
               	//专业表添加操作
               	if($param["addmajor"] != ""){
                   	$rs =   db('major') -> where(["major" => $param["addmajor"]]) ->select();
                     if(count($rs)!=0){
-              			$res2 = db('major') -> where(["major" => $param["addmajor"],"isvalid" => 0,]) ->update(["isvalid" => 1,]);
+              			$res2 = db('major') -> where(["major" => $param["addmajor"],"is_valid" => 0,]) ->update(["is_valid" => 1,]);
                     }else{
                     	$res2 = db('major') -> insert(["major" => $param["addmajor"],]);
                     }
@@ -286,14 +287,15 @@ class Login extends Controller
               
               	//部门表删除操作
               	if($param["deleteid"] != ""){
-              		$res1 = db('department') -> where("id",(int)$param["deleteid"]) -> update(["isvalid" => 0,]);
+              		$data = db('department') -> where("id",(int)$param["deleteid"]) -> find();
+              		$res1 = db('department') -> where("id",(int)$param["deleteid"]) -> update(["is_valid" => 0,"department"=>$data["id"].$data["department"],]);
                 }
               
               	//部门表添加操作
               	if($param["addmajor"] != ""){
                   	$rs =   db('department') -> where(["department" => $param["addmajor"]]) ->select();
                     if(count($rs)!=0){
-              			$res2 = db('department') -> where(["department" => $param["addmajor"],]) ->update(["isvalid" => 1,]);
+              			$res2 = db('department') -> where(["department" => $param["addmajor"],]) ->update(["is_valid" => 1,]);
                     }else {
                     	$res2 = db('department') -> insert(["department" => $param["addmajor"],]);
                     }
@@ -351,7 +353,7 @@ class Login extends Controller
           	//设置一个tp5的验证器，规则：非空、复杂、重复
             $rule = [
               'user'  =>  'require',
-              'password'  =>  'require|min:9|confirm',
+              'password'  =>  'require|min:9|confirm:password_confirm',
             ];
             $msg = [
               'user.require' => '用户名不能为空',

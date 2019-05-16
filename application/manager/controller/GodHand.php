@@ -44,6 +44,7 @@ class GodHand extends Controller
               'car_number'=>$param['car_number'],
               'department'=>$param['user_department'],
               'pass_date'=>date('Y-m-d H:i:s',time()),
+              'valid_date'=>date('Y-m-d H:i:s', strtotime("+10 year")),
               'car_owner'=>$param['owner'],
               'note'=>$param['note'],
               'isvalid'=>0,
