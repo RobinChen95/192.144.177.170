@@ -5,6 +5,15 @@ namespace app\manager\controller;
 use think\View;
 use think\Controller;
 
+use PhpOffice\PhpSpreadsheet\Reader\Exception;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use think\Db;
+use app\common\controller\Common;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use think\Request;
+
 class CredentialSearch extends Controller
 {
 
