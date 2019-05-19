@@ -4,6 +4,10 @@
  * 用于获取数据库的model
  * 即导出Excel的数据*/
 
+namespace app\manager\model;
+use think\Model;
+use think\Db;
+
 class credential_search extends Model
 {
     // 获取数据库信息
