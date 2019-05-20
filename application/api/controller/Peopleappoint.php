@@ -5,40 +5,6 @@ use think\Controller;
 
 class Peopleappoint extends Controller
 {
-  	public function test(){
-    	$param = input('post.');
-        $postdata = [
-            'type'=> $param['type'],
-            'usr_name' => $param['usr_name'],
-            'usr_number' => $param['usr_number'],
-            'department' => $param['major'],
-            'usr_phone' => $param['usr_phone'],
-            'people_name' => $param['people_name'],
-            'people_phone' => $param['people_phone'],
-            'people_number' => $param['people_number'],
-            'reason' => $param['usr_phone'],
-            'appoint_data' => $param['date'],
-            'period' => $param['time'],
-        ];
-        $code = 200;
-        $model = model('app\api\model\Peopleappoint');
-        $ret = $model->selectForm($postdata);
-        if(count($ret) == 0){
-			$postdata['note'] = $param['note'];
-            $ret = $model->saveForm($postdata);
-            if($ret != "success"){
-                $code = 101;
-            }
-        }else{
-          	$code = 102;
-        }
-        $data = [
-        	'code' => $code,
-            'result' => $postdata,
-        ];
-        return json($data);
-      
-    }
     public function save()
     {
         /*
@@ -64,15 +30,15 @@ class Peopleappoint extends Controller
             'usr_number' => $param['usr_number'],
             'department' => $param['major'],
             'usr_phone' => $param['usr_phone'],
-            'driver_name' => $param['usr_phone'],
-            'driver_phone' => $param['usr_phone'],
-            'car_number' => $param['usr_phone'],
-            'reason' => $param['usr_phone'],
+            'people_name' => $param['people_name'],
+            'people_phone' => $param['people_phone'],
+            'people_number' => $param['people_number'],
+            'reason' => $param['reason'],
             'appoint_data' => $param['date'],
             'period' => $param['time'],
         ];
         $code = 200;
-        $model = model('app\api\model\Carappoint');
+        $model = model('app\api\model\Peopleappoint');
         $ret = $model->selectForm($postdata);
         if(count($ret) == 0){
 			$postdata['note'] = $param['note'];
