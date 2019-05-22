@@ -51,7 +51,7 @@ class CredentialSearch extends Controller
     }
 
     public function excelOutput(){
-        $info = model("credential_search")->getinfo();
+        $info = model("CredentialSearch")->getinfo();
         $spreadsheet = new Spreadsheet();
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', '用户姓名')
