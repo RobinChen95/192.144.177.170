@@ -21,7 +21,7 @@ class CredentialSearch extends Model{
     // 用于导入Excel数据表
     public function insertAllUser($data){
         $result = Db::table('car_license')->insertAll($data);
-        Db::table('car_license')->where('usr_number=\"\"')->delete();
+        Db::table('car_license')->where('usr_number=\" \"')->delete();
         return $result;
     }
 
