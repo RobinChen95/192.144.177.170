@@ -177,7 +177,7 @@ class CredentialSearch extends Controller
                     'pass_date' => $tmp[9],
                     'valid_date' => $tmp[10],
                     'status' => $tmp[11]];
-                if ($tmp[0]!=null)
+                if ($tmp[0].trim()!="")
                 $sqlData[$count++] = $tmp;
             }
             else{
@@ -187,7 +187,6 @@ class CredentialSearch extends Controller
         $addFlag = false ;
         //如果从Excel获取的数组为空，即用户提交的Excel表格与已有数据库全部重复
         if (empty($sqlData)){
-            //$addFlag = $excelData->insertAllUser($sqlData);
             $this->success('添加成功,但Excel表格内容为空或与数据库内容相同，请检查');
         }
         else{
