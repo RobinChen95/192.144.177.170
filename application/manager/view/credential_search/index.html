@@ -85,9 +85,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">所有车证列表</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                                <a href="{:url('excelOutput')}" class="btn btn-success btn-sm" >Excel批量导出</a>
+                                <a href="{:url('excelOutput')}" class="btn btn-success btn-sm" >点击导出本列表</a>
                                 <button id="batchShow" type="submit" class="btn btn-success btn-sm">
-                                    Excel批量导入
+                                    Excel批量导入车证
                                 </button>
                                 <br/>
 
@@ -174,7 +174,7 @@
                 $('#batchShow').text('取消上传');
                 form.style.display = 'inline';
             } else {
-                $('#batchShow').text('Excel批量导入');
+                $('#batchShow').text('Excel批量导入车证');
                 form.style.display = 'none';
             }
         });
