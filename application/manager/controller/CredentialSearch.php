@@ -59,6 +59,7 @@ class CredentialSearch extends Controller
         }
     }
 
+    // 导出数据库
     public function excelOutput(){
         $info = model("CredentialSearch")->getinfo();
         $spreadsheet = new Spreadsheet();
@@ -139,5 +140,56 @@ class CredentialSearch extends Controller
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
         exit;
+    }
+
+    // 导入数据库
+    public function excelInput(){
+        // 初始化reader类
+        $reader = new Xlsx();
+        try {
+            // 检测是否有Excel文件
+            $spreadsheet = $reader->load($_FILES['file']['tmp_name']);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+        $sheet = $spreadsheet->getActiveSheet();
+        $sqlData = array();
+        $count = 0;
+        // 使用model
+        $excelData = model("CredentialSearc");
+        // 遍历Excel表格，将数据存入sqlData
+        foreach ($sheet->getRowIterator(2) as $row) {
+            $tmp = array();
+            foreach ($row->getCellIterator() as $cell) {
+                $tmp[] = $cell->getFormattedValue();
+            }
+            // 重复的不添加
+            if ($excelData->findUserByWorkId($tmp[1]) == null) {
+                $tmp = ['name' => $tmp[0],
+                    'work_id' => $tmp[1],
+                    'type_id' => $tmp[2],
+                    'depart_id' => $tmp[3],
+                    'position_id' => $tmp[4]];
+                $sqlData[$count++] = $tmp;
+            }
+            else{
+                continue;
+            }
+        }
+        $addFlag = false ;
+        //如果从Excel获取的数组为空，即用户提交的Excel表格与已有数据库全部重复
+        if (empty($sqlData)){
+            //$addFlag = $excelData->insertAllUser($sqlData);
+            $this->success('添加成功,但Excel表格与数据库内容相同，请检查Excel表格是否已经提交过');
+        }
+        else{
+            $addFlag = $excelData->insertAllUser($sqlData);
+        }
+        //echo  $sqlData[0];
+        if ($addFlag) {
+            $this->success('添加成功,自动跳转');
+        } else {
+            $this->error('添加失败');
+        }
     }
 }
