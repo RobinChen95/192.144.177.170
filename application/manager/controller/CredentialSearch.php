@@ -70,11 +70,11 @@ class CredentialSearch extends Controller
             ->setCellValue('E1', '联系电话')
             ->setCellValue('F1', '车牌号码')
             ->setCellValue('G1', '车牌所有者')
-            ->setCellValue('H1', '申请时间')
-            ->setCellValue('I1', '通过时间')
-            ->setCellValue('J1', '有效期至')
-            ->setCellValue('K1', '车证状态')
-            ->setCellValue('L1', '车证备注');
+            ->setCellValue('H1', '车证备注')
+            ->setCellValue('I1', '申请时间')
+            ->setCellValue('J1', '通过时间')
+            ->setCellValue('K1', '有效期至')
+            ->setCellValue('L1', '车证状态');
         $statusdict = array(0 => "无效", 1 => "有效", 2 => "挂失");
         $spreadsheet->getActiveSheet()->setTitle('固定车证信息');
         $i = 2; //从第二行开始
@@ -87,50 +87,50 @@ class CredentialSearch extends Controller
                 ->setCellValue('E' . $i, $data['usr_phone'])
                 ->setCellValue('F' . $i, $data['car_number'])
                 ->setCellValue('G' . $i, $data['car_owner'])
+                ->setCellValue('H' . $i, $data['note'])
                 ->setCellValue('I' . $i, $data['apply_date'])
                 ->setCellValue('J' . $i, $data['pass_date'])
                 ->setCellValue('K' . $i, $data['valid_date'])
-                ->setCellValue('L' . $i, $statusdict[$data['status']])
-                ->setCellValue('H' . $i, $data['note']);
+                ->setCellValue('L' . $i, $statusdict[$data['status']]);
 
             $i++;
         }
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('A')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('B')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('C')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('D')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('E')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('F')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('G')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('H')
-            ->setWidth(10);
+            ->setWidth(25);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('I')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('J')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('K')
-            ->setWidth(10);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('L')
-            ->setWidth(40);
+            ->setWidth(15);
 
         $spreadsheet->getActiveSheet()->getStyle('A1:L' . $i)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
