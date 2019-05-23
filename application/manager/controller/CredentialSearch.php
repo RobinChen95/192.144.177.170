@@ -177,7 +177,6 @@ class CredentialSearch extends Controller
                     'pass_date' => $tmp[9],
                     'valid_date' => $tmp[10],
                     'status' => $tmp[11]];
-                if (sizeof($tmp)!=0)
                 $sqlData[$count++] = $tmp;
             }
             else{
