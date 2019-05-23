@@ -165,11 +165,18 @@ class CredentialSearch extends Controller
             }
             // 重复的不添加
             if ($excelData->findUserByWorkId($tmp[1]) == null) {
-                $tmp = ['name' => $tmp[0],
-                    'work_id' => $tmp[1],
-                    'type_id' => $tmp[2],
-                    'depart_id' => $tmp[3],
-                    'position_id' => $tmp[4]];
+                $tmp = ['usr_name' => $tmp[0],
+                    'usr_number' => $tmp[1],
+                    'type' => $tmp[2],
+                    'department' => $tmp[3],
+                    'usr_phone' => $tmp[4],
+                    'depart_id' => $tmp[5],
+                    'car_owner' => $tmp[6],
+                    'note' => $tmp[7],
+                    'apply_date' => $tmp[8],
+                    'pass_date' => $tmp[9],
+                    'valid_date' => $tmp[10],
+                    'status' => $tmp[11]];
                 $sqlData[$count++] = $tmp;
             }
             else{
