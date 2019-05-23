@@ -170,7 +170,7 @@ class CredentialSearch extends Controller
                     'type' => $tmp[2],
                     'department' => $tmp[3],
                     'usr_phone' => $tmp[4],
-                    'depart_id' => $tmp[5],
+                    'department' => $tmp[5],
                     'car_owner' => $tmp[6],
                     'note' => $tmp[7],
                     'apply_date' => $tmp[8],
