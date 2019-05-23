@@ -156,7 +156,7 @@ class CredentialSearch extends Controller
         $sqlData = array();
         $count = 0;
         // 使用model
-        $excelData = model("CredentialSearc");
+        $excelData = model("CredentialSearch");
         // 遍历Excel表格，将数据存入sqlData
         foreach ($sheet->getRowIterator(2) as $row) {
             $tmp = array();
