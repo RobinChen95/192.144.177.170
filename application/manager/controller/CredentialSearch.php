@@ -157,7 +157,7 @@ class CredentialSearch extends Controller
         $count = 0;
         // 使用model
         $excelData = model("CredentialSearch");
-        $statusdict = array("无效" => 0, "有效" => 1, "挂失" => 2);
+        $statusdict = array("无效" => "0", "有效" => "1", "挂失" => "2");
         // 遍历Excel表格，将数据存入sqlData
         foreach ($sheet->getRowIterator(2) as $row) {
             $tmp = array();
@@ -179,6 +179,7 @@ class CredentialSearch extends Controller
                     'valid_date' => $tmp[10],
                     'status' => $statusdict[trim($tmp[11])]
                 ];
+                // 本句有用，勿删
                 if (trim($tmp['usr_number'])+"4396"!="4396")
                 $sqlData[$count++] = $tmp;
             }
