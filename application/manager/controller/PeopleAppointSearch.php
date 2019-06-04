@@ -4,6 +4,15 @@ namespace app\manager\controller;
 use think\View;
 use think\Controller;
 
+use think\Db;
+use PhpOffice\PhpSpreadsheet\Reader\Exception;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use app\common\controller\Common;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use think\Request;
+
 class PeopleAppointSearch extends Controller
 {
   
@@ -53,7 +62,7 @@ class PeopleAppointSearch extends Controller
 
     // 导出数据库
     public function excelOutput(){
-        $info = model("CredentialSearch")->getinfo();
+        $info = model("PeopleAppointSearch")->getinfo();
         $spreadsheet = new Spreadsheet();
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', '用户姓名')
