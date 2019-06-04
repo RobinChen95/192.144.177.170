@@ -60,7 +60,7 @@ class CarAppointSearch extends Controller
 
     // 导出数据库
     public function excelOutput(){
-        $info = model("PeopleAppointSearch")->getinfo();
+        $info = model("car_appointment_form")->getinfo();
         $spreadsheet = new Spreadsheet();
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', '用户姓名')
