@@ -150,7 +150,7 @@ class CredentialSearch extends Controller
             // 检测是否有Excel文件
             $spreadsheet = $reader->load($_FILES['file']['tmp_name']);
         } catch (Exception $e) {
-            die($e->getMessage());
+            $this->error('请上传Excel文件！');
         }
         $sheet = $spreadsheet->getActiveSheet();
         $sqlData = array();
