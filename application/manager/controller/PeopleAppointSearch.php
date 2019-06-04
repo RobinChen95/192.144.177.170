@@ -120,7 +120,7 @@ class PeopleAppointSearch extends Controller
             ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('H')
-            ->setWidth(25);
+            ->setWidth(20);
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('I')
             ->setWidth(20);
