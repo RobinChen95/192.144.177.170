@@ -50,4 +50,90 @@ class PeopleAppointSearch extends Controller
             return $view->fetch('more');
         }
     }
+
+    // 导出数据库
+    public function excelOutput(){
+        $info = model("CredentialSearch")->getinfo();
+        $spreadsheet = new Spreadsheet();
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', '用户姓名')
+            ->setCellValue('B1', '工号/学号')
+            ->setCellValue('C1', '用户类型')
+            ->setCellValue('D1', '所属部门')
+            ->setCellValue('E1', '联系电话')
+            ->setCellValue('F1', '入校人员姓名')
+            ->setCellValue('G1', '入校人员电话')
+            ->setCellValue('H1', '入校人数')
+            ->setCellValue('I1', '入校原因')
+            ->setCellValue('J1', '预约入校日期')
+            ->setCellValue('K1', '预约入校时段')
+            ->setCellValue('L1', '备注')
+            ->setCellValue('M1', '申请时间');
+        $spreadsheet->getActiveSheet()->setTitle('临时人员入校信息');
+        $i = 2; //从第二行开始
+        foreach ($info as $data) {
+            $spreadsheet->getActiveSheet()
+                ->setCellValue('A' . $i, $data['usr_name'])
+                ->setCellValue('B' . $i, $data['usr_number'])
+                ->setCellValue('C' . $i, $data['type'])
+                ->setCellValue('D' . $i, $data['department'])
+                ->setCellValue('E' . $i, $data['usr_phone'])
+                ->setCellValue('F' . $i, $data['people_name'])
+                ->setCellValue('G' . $i, $data['people_phone'])
+                ->setCellValue('H' . $i, $data['people_number'])
+                ->setCellValue('I' . $i, $data['reason'])
+                ->setCellValue('J' . $i, $data['appoint_data'])
+                ->setCellValue('K' . $i, $data['period'])
+                ->setCellValue('L' . $i, $data['note'])
+                ->setCellValue('M' . $i, $data['apply_date']);
+            $i++;
+        }
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('A')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('B')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('C')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('D')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('E')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('F')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('G')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('H')
+            ->setWidth(25);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('I')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('J')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('K')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('L')
+            ->setWidth(20);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('L')
+            ->setWidth(20);
+
+        $spreadsheet->getActiveSheet()->getStyle('A1:L' . $i)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="临时人员入校信息.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('php://output');
+        exit;
+    }
 }
