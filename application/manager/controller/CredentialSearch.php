@@ -152,6 +152,9 @@ class CredentialSearch extends Controller
         } catch (Exception $e) {
             $this->error('请上传Excel文件！');
         }
+        if ($spreadsheet==null){
+            $this->error('请上传Excel文件！');
+        }
         $sheet = $spreadsheet->getActiveSheet();
         $sqlData = array();
         $count = 0;
