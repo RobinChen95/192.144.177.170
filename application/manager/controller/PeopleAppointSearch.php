@@ -134,10 +134,10 @@ class PeopleAppointSearch extends Controller
             ->getColumnDimension('L')
             ->setWidth(20);
         $spreadsheet->getActiveSheet()
-            ->getColumnDimension('L')
+            ->getColumnDimension('M')
             ->setWidth(20);
 
-        $spreadsheet->getActiveSheet()->getStyle('A1:L' . $i)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle('A1:M' . $i)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="临时人员入校信息.xlsx"');
         header('Cache-Control: max-age=0');
