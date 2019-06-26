@@ -31,7 +31,7 @@ class PeopleAppointSearch extends Controller
             $view = new View();
           
           	//获取人员预约信息
-          	$view->data = db('people_appointment_form')->select();
+          	$view->data = db('people_appointment_form')->order('id desc')->select();
           	
           	//重定向
         	return $view->fetch();

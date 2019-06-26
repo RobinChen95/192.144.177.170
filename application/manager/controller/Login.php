@@ -262,7 +262,7 @@ class Login extends Controller
               	//专业表删除操作
               	if($param["deleteid"] != ""){
               		$data = db('major') -> where("id",(int)$param["deleteid"]) -> find();
-              		$res1 = db('major') -> where("id",(int)$param["deleteid"]) -> update(["is_valid" => 0,"major"=>$data["id"].$data["major"],]);
+              		$res1 = db('major') -> where("id",(int)$param["deleteid"]) -> update(["is_valid" => 0,"major"=>$data["major"],]);
                 }
               
               	//专业表添加操作

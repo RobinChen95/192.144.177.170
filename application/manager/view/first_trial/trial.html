@@ -221,6 +221,22 @@
                       				</div>
                                   </div>
                                 </div>
+                              
+                              
+                                <br/>
+                                <hr/>
+                                <br/>
+                  				<form name="feedback" id="feedback" action="" method="post" enctype="multipart/form-data">
+                                <div class="print-div">
+                                  <div class="row" style="float:left;width:100%;" >
+                                  	<div class="col col-md-2">
+                                     	<label class=" form-control-label"  >反馈消息：</label>
+                                  	</div>
+                                  	<div class="col-12 col-md-10">
+                                    	<input style="width:100%" class="form-control-static" name="notice" id = "notice" placeholder="若通过，请填写通知内容；若拒绝，请填写拒绝理由。" />
+                      				</div>
+                                  </div>
+                                </div>
                       			
                                 <br/>
                                 <hr/>
@@ -230,7 +246,7 @@
                                 <div class="print-div">
                                   <div class="row" style="float:left;width:46%;margin-right:8%;">
                                       
-                                      <button  type="button" onclick="javascrtpt:window.location.href='/manager/first_trial/pass/id/{$data.id}'" class="btn btn-outline-success btn-lg btn-block">
+                                      <button  type="button" onclick="pass()" class="btn btn-outline-success btn-lg btn-block">
                                         <i class="fa fa-check fa-lg"></i>&nbsp;
                                         <span id="payment-button-amount">通过</span>
                                       </button>
@@ -238,13 +254,14 @@
                                   </div>
                                   <div class="row" style="float:right;width:46%;">
                                       
-                                      <button  type="button" onclick="javascrtpt:window.location.href='/manager/first_trial/refuse/id/{$data.id}'"  class="btn btn-outline-danger btn-lg btn-block">
+                                      <button  type="button" onclick="refuse() "  class="btn btn-outline-danger btn-lg btn-block">
                                         <i class="fa fa-lock fa-lg"></i>&nbsp;
                                         <span id="payment-button-amount">拒绝</span>
                                       </button>
                   					
                                   </div>
                                 </div>
+                  				</form>
                             </div><!-- .card-body -->
                         </div><!-- .card -->
                     </div><!-- .col-md-12 -->
@@ -273,5 +290,15 @@
       	loadJS("/resources/javascript/main.js")
 	</script>
 
+  <script>
+    function pass(){
+        document.feedback.action="/manager/first_trial/pass/id/{$data.id}";
+        document.feedback.submit();
+    }
+    function refuse() {
+        document.feedback.action = "/manager/first_trial/refuse/id/{$data.id}";
+        document.feedback.submit();
+    }
+</script>
 </body>
 </html>

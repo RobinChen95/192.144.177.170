@@ -23,7 +23,7 @@ class FirstTrial extends Controller
             $view = new View();
           
           	//获取未审批的完整申请（即status为1）
-          	$view->data = db('application_form')->where('status',1)->select();
+          	$view->data = db('application_form')->where('status',1)->order('id desc')->select();
           	
           	//重定向
         	return $view->fetch();
@@ -64,7 +64,8 @@ class FirstTrial extends Controller
             $this->redirect(url('login/index'));
         }else{
           	//数据库更新为初审通过状态（status为2）
-            $res = db('application_form')->where('status',1)->where('id',$id)->update(['status' => 2]);
+    		$param = input('post.');
+            $res = db('application_form')->where('status',1)->where('id',$id)->update(['status' => 2, 'notice' => $param["notice"]]);
           
           	//根据反馈，返回更新结果
             if($res != 0){
@@ -108,7 +109,8 @@ class FirstTrial extends Controller
             $this->redirect(url('login/index'));
         }else{
           	//数据库更新为初审拒绝状态（status为3）
-            $res=db('application_form')->where('status',1)->where('id',$id)->update(['status' => 3]);
+    		$param = input('post.');
+            $res=db('application_form')->where('status',1)->where('id',$id)->update(['status' => 3, 'notice' => $param["notice"]]);
           
           	//根据反馈，返回更新结果
             if($res != 0){

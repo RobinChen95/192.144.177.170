@@ -23,7 +23,7 @@ class FinalTrial extends Controller
             $view = new View();
           
           	//获取初审成功的完整申请（即status为2）
-          	$view->data = db('application_form')->where('status',2)->select();
+          	$view->data = db('application_form')->where('status',2)->order('id desc')->select();
           	
           	//重定向
         	return $view->fetch();

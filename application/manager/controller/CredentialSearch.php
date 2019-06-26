@@ -31,7 +31,7 @@ class CredentialSearch extends Controller
             $view = new View();
 
             //获取完整车证
-            $view->data = db('car_license')->where("isvalid", 1)->select();
+            $view->data = db('car_license')->where("isvalid", 1)->order('id desc')->select();
 
             //重定向
             return $view->fetch();

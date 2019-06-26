@@ -31,7 +31,7 @@ class CarAppointSearch extends Controller
             $view = new View();
           
           	//获取车辆预约信息
-          	$view->data = db('car_appointment_form')->select();
+          	$view->data = db('car_appointment_form')->order('id desc')->select();
           	
           	//重定向
         	return $view->fetch();

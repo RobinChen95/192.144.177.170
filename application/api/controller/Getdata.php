@@ -25,10 +25,16 @@ class Getdata extends Controller
         for($i=0; $i<count($plugin); $i++){
           	$fplugin[$i] = ["title" => $plugin[$i]["title"],"content" => $plugin[$i]["content"],];
         }
+        $set = db("setting")->select();
+      	$fset = array();
+        for($i=0; $i<count($set); $i++){
+          	$fset[$i] = ["f1" => $set[$i]["f1_access"],"f2" => $set[$i]["f2_access"],"f3" => $set[$i]["f3_access"],];
+        }
         $data = [
             'major' => $fmajor,
             'depart' => $fdepart,
             'plugin' => $fplugin,
+          	'fset' => $fset,
         ];
         return json($data);
     }
@@ -57,13 +63,14 @@ class Getdata extends Controller
     {
     	$param = input('post.');
         if($param!=[]&&($param["usr_name"]&&$param["usr_number"])){
-            $license = db("application_form")->where($param)->where("status",">",0)->order('apply_date','desc')->limit(30)->select();
+            $license = db("application_form")->where($param)->where("status",">",0)->where("status","<",4)->order('apply_date','desc')->limit(30)->select();
             $flicense = array();
             for($i=0; $i<count($license); $i++){
                 $flicense[$i] = [
                     'car_number' => $license[$i]["car_number"],
                     'apply_date' => substr($license[$i]["apply_date"], 0, 10),
                     'status' => $license[$i]["status"],
+                    'notice' => $license[$i]["notice"],
                 ];
             }
             $data = [
