@@ -28,7 +28,7 @@ class Apply extends Controller
             $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
             $image = new Image();
             $image->open(ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName())->text('64516516515616516',ROOT_PATH . 'public' .'/1.ttf',
-                20,'#000000', Image::IMAGE_WATER_SOUTHEAST)->save(ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName());
+                20,'#000000', Image::IMAGE_WATER_SOUTHEAST)->save("test.png");
         }
         $postdata = [
               'type'=> $param['type'],
