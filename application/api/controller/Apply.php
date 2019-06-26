@@ -27,8 +27,8 @@ class Apply extends Controller
         if($file){
             $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
             $image = new Image();
-            $image->open(DS . 'uploads' .  DS . $info->getSaveName())->text('本图片仅作车证申请之用','./1.ttf',20,'#000000',
-                Image::IMAGE_WATER_SOUTHEAST)->save(DS . 'uploads' .  DS . $info->getSaveName());
+            $image->open(ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName())->text('64516516515616516',ROOT_PATH . 'public' .'/1.ttf',
+                20,'#000000', Image::IMAGE_WATER_SOUTHEAST)->save(ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName());
         }
         $postdata = [
               'type'=> $param['type'],
