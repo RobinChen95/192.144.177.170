@@ -14,7 +14,8 @@ use think\Request;
 use think\Model;
 
 class Addpic extends Controller{
-  	//从数据库获取固定车证办理的插件数据
+    // 这个是从管理端插入图片的save
+  	// 从数据库获取固定车证办理的插件数据
     public function save(){
         // 跨域申请需要显示取得许可
         header('Access-Control-Allow-Origin:*');  

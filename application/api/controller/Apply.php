@@ -2,6 +2,7 @@
 namespace app\api\controller;
 
 use think\Controller;
+use think\Image;
 
 class Apply extends Controller
 {
@@ -113,10 +114,12 @@ class Apply extends Controller
             return json($data);		
         }
         $file = request()->file('image');
-    	
+
         // 移动到框架应用根目录/public/uploads/ 目录下
         if($file){
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+            $image = new \Think\Image();
+            $image->open($file)->text('本图片仅作车证申请之用','./1.ttf',20,'#000000',\Think\Image::IMAGE_WATER_SOUTHEAST)->move(ROOT_PATH . 'public' . DS . 'uploads');
+            //$info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
         }
         $postdata = [
               'type'=> $param['type'],
