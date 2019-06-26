@@ -118,7 +118,8 @@ class Apply extends Controller
         // 移动到框架应用根目录/public/uploads/ 目录下
         if($file){
             $image = new \Think\Image();
-            $image->open($file)->text('本图片仅作车证申请之用','./1.ttf',20,'#000000',\Think\Image::IMAGE_WATER_SOUTHEAST)->move(ROOT_PATH . 'public' . DS . 'uploads');
+            $image->open($file)->text('本图片仅作车证申请之用','./1.ttf',20,'#000000',\Think\Image::IMAGE_WATER_SOUTHEAST)->save("new.jpg");
+            $info = $image->move(ROOT_PATH . 'public' . DS . 'uploads');
             //$info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
         }
         $postdata = [
