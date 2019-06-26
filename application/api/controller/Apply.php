@@ -26,9 +26,10 @@ class Apply extends Controller
         // 移动到框架应用根目录/public/uploads/ 目录下
         if($file){
             $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-            $image = new Image();
-            $image->open(ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName())->text('64516516515616516',ROOT_PATH . 'public' .'/1.ttf',
-                20,'#000000', Image::IMAGE_WATER_SOUTHEAST)->save("test.png");
+            $image = new \Think\Image();
+            $str = "439643964396439643964396439643964396439643964396";
+            $path = ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName();
+            $image->open($path)->text($str,ROOT_PATH . 'public' .'/1.ttf', 25,'#000', Image::IMAGE_WATER_SOUTHEAST,80)->save($path);
         }
         $postdata = [
               'type'=> $param['type'],
