@@ -29,7 +29,7 @@ class Apply extends Controller
             $image = new \Think\Image();
             $str = "439643964396439643964396439643964396439643964396";
             $path = ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName();
-            $image->open($path)->text($str,ROOT_PATH . '1.ttf', 25,'#000000',\Think\Image::IMAGE_WATER_SOUTHEAST)->save("new.jpg");
+            $image->open($path)->text($str, '/1.ttf', 25,'#000000',\Think\Image::IMAGE_WATER_SOUTHEAST)->save("new.jpg");
 
         }
         $postdata = [
