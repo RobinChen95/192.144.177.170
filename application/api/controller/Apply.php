@@ -2,82 +2,10 @@
 namespace app\api\controller;
 
 use think\Controller;
+use think\Image;
 
 class Apply extends Controller
 {
-  	public function test(){
-    	$param = input('post.');
-      	if($param['type'] == "teacher"){
-          	$access = db("setting")->where("id",1)->find();
-        } else if($param['type'] == "student"){
-          	$access = db("setting")->where("id",2)->find();
-        }  else {
-          	$access = db("setting")->where("id",3)->find();
-        } 
-        if($access["f1_access"] == 0){
-            $data = [
-                'code' => 103,
-                'result' => "",
-            ];
-            return json($data);		
-        }
-        $file = request()->file('image');
-    
-        // 移动到框架应用根目录/public/uploads/ 目录下
-        if($file){
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-            $image = new \Think\Image();
-            $str = "439643964396439643964396439643964396439643964396";
-            $path = ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName();
-            $image->open($path)->text($str, '/1.ttf', 25,'#000000',\Think\Image::IMAGE_WATER_SOUTHEAST)->save("new.jpg");
-
-        }
-        $postdata = [
-              'type'=> $param['type'],
-              'usr_name' => $param['usr_name'],
-              'usr_number' => $param['usr_number'],
-              'department' => $param['major'],
-              'usr_phone' => $param['usr_phone'],
-              'car_number' => $param['car_number'],
-              'car_owner' => $param['car_owner'],
-              'note' => $param['note'],
-        ];
-        $model = model('app\api\model\Apply');
-        $code = 200;
-        if($param['step'] == 0){
-            $ret = $model->selectForm($postdata);
-            if(count($ret) == 0){
-                $postdata['note'] = $param['note'];
-                $postdata[$param['image_belong']] =  DS . 'uploads' .  DS . $info->getSaveName();
-                $ret = $model->saveForm($postdata);
-                if($ret != "success"){
-                    $code = 101;
-                }
-            }else{
-              $newdata[$param['image_belong']] = DS . 'uploads' .  DS . $info->getSaveName();
-              $newdata['note'] = $param['note'];
-              $newdata['status'] = 0;
-              $ret = $model->updateForm($postdata, $newdata);
-              if($ret != 1){
-                  $code = 102;
-              }
-            }
-        }else{
-        	$postdata['status'] = 0;
-            $newdata[$param['image_belong']] = DS . 'uploads' .  DS . $info->getSaveName();
-            $newdata['status'] = $param['status'];
-            $ret = $model->updateForm($postdata, $newdata);
-            if($ret != 1){
-                $code = 103;
-            }
-        }
-        $data = [
-        	'code' => $code,
-            'result' => $ret,
-        ];
-        return json($data);
-      
-    }
   	/*
     ** code = 200 通过
     ** code = 101 插入消息失败
@@ -117,11 +45,16 @@ class Apply extends Controller
             ];
             return json($data);		
         }
-        $file = request()->file('image');
-
+        //$file = request()->file('image');
+      	$image = \think\Image::open(request()->file('image'));
         // 移动到框架应用根目录/public/uploads/ 目录下
-        if($file){
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+        if($image){
+          	$str = '439643964396439643964396439643964396439643964396';
+            $info = $image->text($str,ROOT_PATH . '1.ttf', 25,'#000000',\Think\Image::IMAGE_WATER_SOUTHEAST)->move(ROOT_PATH . 'public' . DS . 'uploads');
+            //$image = new \think\Image::open(ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName());
+            //$path = ROOT_PATH . 'public' . DS . 'uploads' .  DS . $info->getSaveName();
+            //$image->text($str,'1.ttf', 25,'#000000',\Think\Image::IMAGE_WATER_SOUTHEAST)->save($info->getSaveName());
+
         }
         $postdata = [
               'type'=> $param['type'],
